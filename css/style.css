@@ -79,3 +79,5 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
 .badge.local{background:#f3d9a4;color:#6b4b12}
 .badge.cloud{background:#c9e6d3;color:var(--verde-selo-700)}
+
+[hidden]{display:none !important}
