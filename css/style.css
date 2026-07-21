@@ -12,7 +12,7 @@ h1,h2,h3,.display{font-family:'Anton',sans-serif;text-transform:uppercase;letter
 a{color:var(--verde-selo);text-decoration:none}
 a:hover{color:var(--verde-escuro)}
 img{max-width:100%}
-.section{padding:88px 8vw}
+.section{padding:88px 8vw;scroll-margin-top:80px}
 .kicker{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:var(--verde-selo)}
 .stripe{width:64px;height:0;border-top:3px solid var(--verde-selo);border-bottom:0;margin-top:6px;position:relative}
 .stripe::after{content:"";position:absolute;top:6px;left:0;width:64px;height:0;border-top:3px solid var(--verde-selo)}
@@ -55,6 +55,19 @@ details[open] .faq-chevron{transform:rotate(180deg)}
   .gallery-grid{grid-template-columns:repeat(2,1fr) !important}
   .contact-form{grid-template-columns:1fr !important}
   .nav-links{display:none}
+  .admin-form-row{grid-template-columns:1fr !important}
+}
+
+@media (max-width:640px){
+  .site-header{padding:10px 5vw !important;gap:8px}
+  .site-header .display{font-size:15px !important}
+  .site-header img{width:36px !important;height:36px !important}
+  .site-header .btn{padding:8px 14px !important;font-size:13px !important}
+  h1{font-size:clamp(30px,8vw,40px) !important}
+  .admin-header{flex-wrap:wrap;gap:10px;padding:14px 5vw}
+  .admin-main{padding:28px 5vw}
+  .admin-table-wrap{overflow-x:auto}
+  .admin-table{min-width:480px}
 }
 
 /* ===== Painel administrativo ===== */
