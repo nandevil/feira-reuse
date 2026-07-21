@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel — Feira Reuse Araruama</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="img/logo.jpg">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin-body">
+
+<div id="login-view" class="admin-login" hidden>
+  <div class="admin-login-box">
+    <h1 class="display">Painel Feira Reuse</h1>
+    <p>Entre com o e-mail e senha cadastrados no Supabase para gerenciar a feira.</p>
+    <form id="login-form" style="display:flex;flex-direction:column;gap:14px">
+      <div class="field">
+        <label style="font-size:13px;font-weight:600">E-mail</label>
+        <input type="email" id="login-email" required/>
+      </div>
+      <div class="field">
+        <label style="font-size:13px;font-weight:600">Senha</label>
+        <input type="password" id="login-password" required/>
+      </div>
+      <button type="submit" class="btn btn-primary">Entrar</button>
+      <p id="login-msg" class="form-msg" role="status" style="color:#b3261e"></p>
+    </form>
+  </div>
+</div>
+
+<div id="app-view" hidden>
+  <header class="admin-header">
+    <span class="display">Painel Feira Reuse</span>
+    <div style="display:flex;align-items:center;gap:14px">
+      <span id="mode-badge" class="badge"></span>
+      <button id="logout-btn" class="btn btn-secondary" style="border-color:var(--creme);color:var(--creme);padding:8px 16px">Sair</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+
+    <div class="admin-card">
+      <h2>Próxima edição da feira</h2>
+      <form id="agenda-form">
+        <div class="admin-form-row">
+          <div>
+            <label>Rótulo curto (aparece no selo)</label>
+            <input type="text" id="agenda-label" placeholder="Ex: 16 AGO"/>
+          </div>
+          <div>
+            <label>Data (texto livre)</label>
+            <input type="text" id="agenda-date" placeholder="Ex: 16 de agosto, sábado"/>
+          </div>
+        </div>
+        <div class="admin-form-row">
+          <div>
+            <label>Endereço</label>
+            <input type="text" id="agenda-address" placeholder="Ex: Praça Ary Parreiras, Araruama - RJ"/>
+          </div>
+          <div>
+            <label>Horário</label>
+            <input type="text" id="agenda-schedule" placeholder="Ex: das 10h às 18h"/>
+          </div>
+        </div>
+        <div class="admin-form-row full">
+          <div>
+            <label>Link do mapa (Google Maps)</label>
+            <input type="url" id="agenda-map" placeholder="https://maps.google.com/..."/>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar agenda</button>
+        <p id="agenda-msg" class="form-msg" role="status"></p>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <h2>Inscritos em "Avise-me" (<span id="inscricoes-count">0</span>)</h2>
+      <div id="inscricoes-empty" class="admin-empty" hidden>Ninguém se inscreveu ainda.</div>
+      <table class="admin-table" id="inscricoes-table" hidden>
+        <thead><tr><th>Data</th><th>E-mail</th><th>WhatsApp</th></tr></thead>
+        <tbody id="inscricoes-body"></tbody>
+      </table>
+    </div>
+
+    <div class="admin-card">
+      <h2>Feirantes cadastrados (<span id="feirantes-count">0</span>)</h2>
+      <div id="feirantes-empty" class="admin-empty" hidden>Nenhuma candidatura recebida ainda.</div>
+      <table class="admin-table" id="feirantes-table" hidden>
+        <thead><tr><th>Data</th><th>Nome</th><th>WhatsApp</th><th>Produtos</th></tr></thead>
+        <tbody id="feirantes-body"></tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
