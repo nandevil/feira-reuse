@@ -182,21 +182,21 @@
     <div class="stripe"></div>
     <h2 class="h">Próximas feiras</h2>
     <p style="font-size:16px;color:color-mix(in oklch, var(--verde-escuro) 80%, transparent);max-width:600px;margin:0 auto 32px">Atualizada mensalmente pela organização. Confira a próxima data ou cadastre-se para ser avisado.</p>
-    <div class="card agenda-card" style="max-width:680px;margin:0 auto;text-align:left;overflow:hidden">
+    <div class="card agenda-card" style="max-width:680px;margin:0 auto;text-align:center;overflow:hidden">
       <div id="agenda-image-wrap" style="width:100%;height:260px">
         <div id="agenda-image-fallback" class="img-placeholder" style="width:100%;height:100%">Imagem da agenda em breve</div>
       </div>
       <div style="padding:28px 32px">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:14px;margin-bottom:20px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px">
           <h3 style="margin:0;font-weight:400;font-size:22px;color:var(--verde-escuro)">Próxima edição</h3>
           <span id="agenda-gratuita-badge" class="plank" hidden>Entrada Gratuita</span>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:24px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;margin-bottom:24px">
           <p style="margin:0;font-size:15px;color:var(--verde-escuro)"><strong>Data:</strong> <span id="agenda-data-texto">a definir</span></p>
           <p style="margin:0;font-size:15px;color:var(--verde-escuro)"><strong>Horário:</strong> <span id="agenda-horario-texto">a definir</span></p>
           <p style="margin:0;font-size:15px;color:var(--verde-escuro)"><strong>Local:</strong> <span id="agenda-local-texto">a definir</span></p>
         </div>
-        <div class="btn-row" style="justify-content:flex-start">
+        <div class="btn-row">
           <a href="#contato" class="btn btn-primary">Avise-me quando confirmar</a>
           <a href="#" id="agenda-card-map-link" class="btn btn-secondary" target="_blank" rel="noopener">Ver no mapa</a>
         </div>
