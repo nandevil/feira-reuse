@@ -231,22 +231,22 @@
           <p id="feirante-msg" class="form-msg" role="status"></p>
         </form>
       </div>
-      <div style="display:flex;flex-direction:column;gap:20px;text-align:left">
-        <div style="display:flex;gap:16px;align-items:flex-start">
+      <div class="steps-col" style="display:flex;flex-direction:column;gap:20px;text-align:left">
+        <div class="step-row" style="display:flex;gap:16px;align-items:flex-start">
           <div style="width:34px;height:34px;border-radius:50%;background:var(--creme);color:var(--verde-escuro);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;flex:none">1</div>
           <div><strong style="font-weight:400;font-size:17px;color:var(--creme);font-family:'Anton',sans-serif">Responda o questionário</strong><p style="margin:6px 0 0;color:color-mix(in oklch, var(--creme) 78%, transparent)">Conte o que você vende e como se encaixa no reuso.</p></div>
         </div>
-        <div style="display:flex;gap:16px;align-items:flex-start">
+        <div class="step-row" style="display:flex;gap:16px;align-items:flex-start">
           <div style="width:34px;height:34px;border-radius:50%;background:var(--creme);color:var(--verde-escuro);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;flex:none">2</div>
           <div><strong style="font-weight:400;font-size:17px;color:var(--creme);font-family:'Anton',sans-serif">Receba a confirmação no WhatsApp</strong><p style="margin:6px 0 0;color:color-mix(in oklch, var(--creme) 78%, transparent)">A organização recebe suas respostas e reserva seu espaço.</p></div>
         </div>
-        <div style="display:flex;gap:16px;align-items:flex-start">
+        <div class="step-row" style="display:flex;gap:16px;align-items:flex-start">
           <div style="width:34px;height:34px;border-radius:50%;background:var(--creme);color:var(--verde-escuro);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;flex:none">3</div>
           <div><strong style="font-weight:400;font-size:17px;color:var(--creme);font-family:'Anton',sans-serif">Monte sua barraca</strong><p style="margin:6px 0 0;color:color-mix(in oklch, var(--creme) 78%, transparent)">Chegue no dia combinado e faça parte da Feira Reuse.</p></div>
         </div>
         <div style="margin-top:8px">
           <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--creme)">Categorias que aceitamos</p>
-          <div style="display:flex;flex-wrap:wrap;gap:12px">
+          <div class="tags-row" style="display:flex;flex-wrap:wrap;gap:12px">
             <span class="plank">Vestuário</span>
             <span class="plank">Alimentação</span>
             <span class="plank">Artesanato</span>
@@ -261,53 +261,55 @@
     <div class="stripe"></div>
     <h2 class="h">Nossa História &amp; Parcerias</h2>
 
-    <div style="max-width:720px;margin:0 auto 56px">
-      <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Como tudo começou</h3>
-      <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0 0 16px">A Feira Reuse Araruama nasceu no período pós-pandemia como uma resposta de afeto, união e solidariedade. Em um momento em que muitos pequenos empreendedores locais enfrentavam a perda de familiares, o desemprego ou o desafio de recomeçar, a feira surgiu para estender a mão e abrir caminhos na Região dos Lagos.</p>
-      <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0">O que começou como uma rede de apoio mútuo rapidamente se transformou em um movimento vivo de transformação social, cultural e econômica. Hoje, consolidada sobre os pilares da Moda Circular, Artesanato Autoral e Gastronomia, a feira promove encontros periódicos, com entrada gratuita, gerando oportunidade, renda e consumo consciente.</p>
-    </div>
-
-    <div style="max-width:720px;margin:0 auto">
-      <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Por que ser um parceiro do projeto?</h3>
-      <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0 0 40px">Apoiar a Reuse Araruama é fazer parte de um movimento que transforma a comunidade e movimenta a economia da nossa região. Ao associar sua marca ou instituição ao nosso projeto, sua empresa garante:</p>
-    </div>
-
-    <div class="carousel" id="parcerias-carousel" style="max-width:820px;margin:0 auto 48px">
-      <div class="info-carousel-track" id="parcerias-track">
-        <div class="info-slide">
-          <div class="info-card info-card--boxed">
-            <div class="info-card-icon" style="font-size:18px">🌿</div>
-            <div class="info-card-body"><h4>Compromisso com o Impacto Social e Ambiental</h4><p>Sua marca conectada diretamente a pautas de sustentabilidade, upcycling, economia circular e inclusão de empreendedores locais.</p></div>
-          </div>
-        </div>
-        <div class="info-slide">
-          <div class="info-card info-card--boxed">
-            <div class="info-card-icon" style="font-size:18px">📣</div>
-            <div class="info-card-body"><h4>Visibilidade e Alcance</h4><p>Destaque contínuo na comunicação da feira — site oficial, redes sociais, materiais impressos e sinalização visual durante os eventos presenciais.</p></div>
-          </div>
-        </div>
-        <div class="info-slide">
-          <div class="info-card info-card--boxed">
-            <div class="info-card-icon" style="font-size:18px">🤝</div>
-            <div class="info-card-body"><h4>Conexão Direta com a Comunidade</h4><p>Proximidade com um público engajado, que valoriza a cultura local, o consumo consciente e o desenvolvimento de Araruama.</p></div>
-          </div>
-        </div>
-        <div class="info-slide">
-          <div class="info-card info-card--boxed">
-            <div class="info-card-icon" style="font-size:18px">🏛️</div>
-            <div class="info-card-body"><h4>Fomento ao Turismo e Cultura</h4><p>Apoio na consolidação da cidade como um polo de turismo sustentável e de feiras criativas na Região dos Lagos.</p></div>
-          </div>
-        </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:40px;text-align:left" class="parcerias-grid">
+      <div class="card" style="padding:32px">
+        <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Como tudo começou</h3>
+        <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0 0 16px">A Feira Reuse Araruama nasceu no período pós-pandemia como uma resposta de afeto, união e solidariedade. Em um momento em que muitos pequenos empreendedores locais enfrentavam a perda de familiares, o desemprego ou o desafio de recomeçar, a feira surgiu para estender a mão e abrir caminhos na Região dos Lagos.</p>
+        <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0">O que começou como uma rede de apoio mútuo rapidamente se transformou em um movimento vivo de transformação social, cultural e econômica. Hoje, consolidada sobre os pilares da Moda Circular, Artesanato Autoral e Gastronomia, a feira promove encontros periódicos, com entrada gratuita, gerando oportunidade, renda e consumo consciente.</p>
       </div>
-      <div class="carousel-controls">
-        <button type="button" class="carousel-btn-inline" id="parcerias-prev" aria-label="Benefício anterior">‹</button>
-        <div class="carousel-dots" id="parcerias-dots">
-          <button type="button" class="carousel-dot active" data-i="0" aria-label="Ir para o benefício 1"></button>
-          <button type="button" class="carousel-dot" data-i="1" aria-label="Ir para o benefício 2"></button>
-          <button type="button" class="carousel-dot" data-i="2" aria-label="Ir para o benefício 3"></button>
-          <button type="button" class="carousel-dot" data-i="3" aria-label="Ir para o benefício 4"></button>
+
+      <div>
+        <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Por que ser um parceiro do projeto?</h3>
+        <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0 0 24px">Apoiar a Reuse Araruama é fazer parte de um movimento que transforma a comunidade e movimenta a economia da nossa região. Ao associar sua marca ou instituição ao nosso projeto, sua empresa garante:</p>
+
+        <div class="carousel" id="parcerias-carousel">
+          <div class="info-carousel-track" id="parcerias-track">
+            <div class="info-slide">
+              <div class="info-card info-card--boxed">
+                <div class="info-card-icon" style="font-size:18px">🌿</div>
+                <div class="info-card-body"><h4>Compromisso com o Impacto Social e Ambiental</h4><p>Sua marca conectada diretamente a pautas de sustentabilidade, upcycling, economia circular e inclusão de empreendedores locais.</p></div>
+              </div>
+            </div>
+            <div class="info-slide">
+              <div class="info-card info-card--boxed">
+                <div class="info-card-icon" style="font-size:18px">📣</div>
+                <div class="info-card-body"><h4>Visibilidade e Alcance</h4><p>Destaque contínuo na comunicação da feira — site oficial, redes sociais, materiais impressos e sinalização visual durante os eventos presenciais.</p></div>
+              </div>
+            </div>
+            <div class="info-slide">
+              <div class="info-card info-card--boxed">
+                <div class="info-card-icon" style="font-size:18px">🤝</div>
+                <div class="info-card-body"><h4>Conexão Direta com a Comunidade</h4><p>Proximidade com um público engajado, que valoriza a cultura local, o consumo consciente e o desenvolvimento de Araruama.</p></div>
+              </div>
+            </div>
+            <div class="info-slide">
+              <div class="info-card info-card--boxed">
+                <div class="info-card-icon" style="font-size:18px">🏛️</div>
+                <div class="info-card-body"><h4>Fomento ao Turismo e Cultura</h4><p>Apoio na consolidação da cidade como um polo de turismo sustentável e de feiras criativas na Região dos Lagos.</p></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <button type="button" class="carousel-btn-inline" id="parcerias-prev" aria-label="Benefício anterior">‹</button>
+            <div class="carousel-dots" id="parcerias-dots">
+              <button type="button" class="carousel-dot active" data-i="0" aria-label="Ir para o benefício 1"></button>
+              <button type="button" class="carousel-dot" data-i="1" aria-label="Ir para o benefício 2"></button>
+              <button type="button" class="carousel-dot" data-i="2" aria-label="Ir para o benefício 3"></button>
+              <button type="button" class="carousel-dot" data-i="3" aria-label="Ir para o benefício 4"></button>
+            </div>
+            <button type="button" class="carousel-btn-inline" id="parcerias-next" aria-label="Próximo benefício">›</button>
+          </div>
         </div>
-        <button type="button" class="carousel-btn-inline" id="parcerias-next" aria-label="Próximo benefício">›</button>
       </div>
     </div>
 

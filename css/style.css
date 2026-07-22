@@ -77,9 +77,6 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 .info-card-icon{width:40px;height:40px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none;font-size:18px}
 .info-card-body h4{margin:0 0 6px;font-weight:700;font-size:16px;color:var(--verde-escuro)}
 .info-card-body p{margin:0;font-size:14px;line-height:1.6;color:color-mix(in oklch, var(--verde-escuro) 82%, transparent)}
-@media (min-width:700px){
-  .info-slide{flex:0 0 calc(50% - 10px)}
-}
 
 .carousel-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px}
 .carousel-controls .carousel-dots{margin-top:0}
@@ -103,7 +100,7 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 /* Evita "grid blowout": sem isso, uma coluna de grid não encolhe
    abaixo da largura mínima do seu conteúdo (carrossel, texto longo
    etc.) e força a página inteira a estourar horizontalmente. */
-.hero-grid > *, .sobre-grid > *, .feirantes-grid > *, .feedback-grid > *{min-width:0}
+.hero-grid > *, .sobre-grid > *, .feirantes-grid > *, .feedback-grid > *, .parcerias-grid > *{min-width:0}
 
 .nav-links{display:flex;gap:26px;align-items:center}
 .nav-links a{font-size:14px;font-weight:600;color:var(--verde-escuro)}
@@ -122,12 +119,28 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 @media (max-width:900px){
   .section{padding:64px 6vw}
   .hero-grid,.sobre-grid{grid-template-columns:1fr !important}
-  .feirantes-grid, .feedback-grid{grid-template-columns:1fr !important}
+  .feirantes-grid, .feedback-grid, .parcerias-grid{grid-template-columns:1fr !important}
   .contact-form{grid-template-columns:1fr !important}
   .nav-links{display:none}
   .admin-form-row{grid-template-columns:1fr !important}
   .social-row{flex-direction:column;width:100%}
   .social-pill{width:100%}
+
+  /* Centraliza todo o conteúdo no mobile — no desktop, os componentes
+     abaixo continuam alinhados à esquerda (mais legíveis em listas/
+     formulários largos). Usa !important só onde o elemento já tem
+     text-align:left inline, que senão venceria a media query. */
+  .sobre-illustration, #form-avise-me, #form-feirante, .steps-col,
+  .quote-card, .faq-item p{
+    text-align:center !important;
+  }
+  .step-row, .quote-author, .info-card{
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+  }
+  .step-row > div:last-child{text-align:center}
+  .tags-row{justify-content:center}
 }
 
 @media (max-width:640px){
