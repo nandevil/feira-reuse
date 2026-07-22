@@ -1,5 +1,5 @@
 /* Landing page — carrega a agenda da nuvem (se configurada), envia os
-   formulários "Avise-me" e "Seja feirante", injeta o mapa e os dados
+   formulários "Avise-me" e "Seja feirante", e monta os dados
    estruturados (JSON-LD) a partir da mesma agenda. */
 
 const LOCAL_KEY_INSCRICOES = "feiraReuseInscricoesLocal";
@@ -32,35 +32,6 @@ async function loadRedesSociais() {
       });
     }
   });
-}
-
-/* Deriva uma URL de embed do Google Maps a partir do link salvo na agenda
-   (agenda-map). Se o link já for um embed, usa direto; se tiver um "q="
-   reaproveita a busca; senão, cai para o endereço em texto — sempre sem
-   precisar de chave de API. */
-function buildMapEmbedUrl(agenda) {
-  if (agenda.mapUrl) {
-    try {
-      const u = new URL(agenda.mapUrl);
-      if (/\/maps\/embed/.test(u.pathname) || u.searchParams.get("output") === "embed") {
-        return agenda.mapUrl;
-      }
-      const q = u.searchParams.get("q") || u.searchParams.get("query");
-      if (q) return "https://www.google.com/maps?q=" + encodeURIComponent(q) + "&output=embed";
-    } catch (e) { /* URL inválida, cai para o endereço abaixo */ }
-  }
-  if (agenda.address && agenda.address !== "a definir") {
-    return "https://www.google.com/maps?q=" + encodeURIComponent(agenda.address) + "&output=embed";
-  }
-  return null;
-}
-
-function renderMap(agenda) {
-  const container = document.getElementById("mapa-container");
-  if (!container) return;
-  const embedUrl = buildMapEmbedUrl(agenda);
-  if (!embedUrl) return; // mantém o ícone de fallback que já está no HTML
-  container.innerHTML = `<iframe src="${embedUrl}" title="Mapa do local da Feira Reuse" width="100%" height="100%" style="border:0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
 }
 
 /* JSON-LD (schema.org) — reflete a mesma agenda usada no resto da página,
@@ -136,12 +107,11 @@ function renderAgendaCard(agenda) {
 }
 
 async function loadAgenda() {
-  // Sem Supabase configurado, ainda assim popula o mapa/JSON-LD com os
+  // Sem Supabase configurado, ainda assim popula o card/JSON-LD com os
   // valores padrão ("a definir") em vez de deixar tudo vazio.
   const fallbackAgenda = { label: "A definir", dateText: "", address: "a definir", schedule: "a definir", mapUrl: "", imageUrl: "", entradaGratuita: true };
   if (!supabaseEnabled()) {
     renderAgendaCard(fallbackAgenda);
-    renderMap(fallbackAgenda);
     renderStructuredData(fallbackAgenda);
     return;
   }
@@ -149,23 +119,12 @@ async function loadAgenda() {
   const { data, error } = await sb.from("agenda").select("*").eq("id", 1).maybeSingle();
   if (error || !data) {
     renderAgendaCard(fallbackAgenda);
-    renderMap(fallbackAgenda);
     renderStructuredData(fallbackAgenda);
     return;
   }
   const agenda = rowToAgenda(data);
 
   renderAgendaCard(agenda);
-
-  const enderecoEl = document.getElementById("local-endereco");
-  const dataHoraEl = document.getElementById("local-data-hora");
-  if (enderecoEl) enderecoEl.innerHTML = `<strong>Endereço:</strong> ${agenda.address}`;
-  if (dataHoraEl) dataHoraEl.innerHTML = `<strong>Data e horário:</strong> ${agenda.dateText || "a definir"} ${agenda.schedule ? "· " + agenda.schedule : ""}`;
-
-  const mapLink = document.getElementById("ver-mapa-link");
-  if (mapLink && agenda.mapUrl) mapLink.href = agenda.mapUrl;
-
-  renderMap(agenda);
   renderStructuredData(agenda);
 }
 
