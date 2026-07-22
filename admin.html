@@ -47,14 +47,23 @@
     <div class="admin-card">
       <h2>Próxima edição da feira</h2>
       <form id="agenda-form">
-        <div class="admin-form-row">
-          <div>
-            <label>Rótulo curto (aparece no selo)</label>
-            <input type="text" id="agenda-label" placeholder="Ex: 16 AGO"/>
+        <div class="admin-form-row full">
+          <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+            <div id="agenda-image-preview" style="width:100px;height:70px;border-radius:8px;overflow:hidden;flex:none;background:color-mix(in oklch, var(--verde-selo) 15%, transparent)"></div>
+            <div style="flex:1;min-width:200px">
+              <label>Imagem da agenda deste mês</label>
+              <input type="file" id="agenda-image-file" accept="image/png,image/jpeg,image/webp"/>
+            </div>
           </div>
+        </div>
+        <div class="admin-form-row">
           <div>
             <label>Data (texto livre)</label>
             <input type="text" id="agenda-date" placeholder="Ex: 16 de agosto, sábado"/>
+          </div>
+          <div>
+            <label>Horário</label>
+            <input type="text" id="agenda-schedule" placeholder="Ex: das 10h às 18h"/>
           </div>
         </div>
         <div class="admin-form-row">
@@ -63,15 +72,14 @@
             <input type="text" id="agenda-address" placeholder="Ex: Praça Ary Parreiras, Araruama - RJ"/>
           </div>
           <div>
-            <label>Horário</label>
-            <input type="text" id="agenda-schedule" placeholder="Ex: das 10h às 18h"/>
-          </div>
-        </div>
-        <div class="admin-form-row full">
-          <div>
             <label>Link do mapa (Google Maps)</label>
             <input type="url" id="agenda-map" placeholder="https://maps.google.com/..."/>
           </div>
+        </div>
+        <div class="admin-form-row full">
+          <label style="display:flex;align-items:center;gap:8px;font-weight:600;font-size:13px">
+            <input type="checkbox" id="agenda-gratuita" style="width:auto"/> Mostrar aviso "Entrada Gratuita"
+          </label>
         </div>
         <button type="submit" class="btn btn-primary">Salvar agenda</button>
         <p id="agenda-msg" class="form-msg" role="status"></p>

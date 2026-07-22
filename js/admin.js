@@ -75,30 +75,67 @@ document.getElementById("logout-btn").addEventListener("click", async () => {
   loginView.hidden = false;
 });
 
+let agendaAtual = null;
+
 async function loadAgendaForm() {
   const { data } = await sb.from("agenda").select("*").eq("id", 1).maybeSingle();
   if (data) {
     const a = rowToAgenda(data);
-    document.getElementById("agenda-label").value = a.label === "A definir" ? "" : a.label;
+    agendaAtual = a;
     document.getElementById("agenda-date").value = a.dateText;
     document.getElementById("agenda-address").value = a.address === "a definir" ? "" : a.address;
     document.getElementById("agenda-schedule").value = a.schedule === "a definir" ? "" : a.schedule;
     document.getElementById("agenda-map").value = a.mapUrl;
+    document.getElementById("agenda-gratuita").checked = a.entradaGratuita;
+    const preview = document.getElementById("agenda-image-preview");
+    preview.innerHTML = a.imageUrl
+      ? `<img src="${a.imageUrl}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"/>`
+      : "";
   }
 }
 
 document.getElementById("agenda-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const msg = document.getElementById("agenda-msg");
-  const agenda = {
-    label: document.getElementById("agenda-label").value.trim() || "A definir",
-    dateText: document.getElementById("agenda-date").value.trim(),
-    address: document.getElementById("agenda-address").value.trim() || "a definir",
-    schedule: document.getElementById("agenda-schedule").value.trim() || "a definir",
-    mapUrl: document.getElementById("agenda-map").value.trim()
-  };
-  const { error } = await sb.from("agenda").upsert(agendaToRow(agenda));
-  showFormMessage(msg, error ? "Não foi possível salvar." : "Agenda atualizada!", !error);
+  const btn = e.target.querySelector("button[type=submit]");
+  const fileInput = document.getElementById("agenda-image-file");
+  const file = fileInput.files[0];
+
+  btn.disabled = true;
+  try {
+    const agenda = {
+      dateText: document.getElementById("agenda-date").value.trim(),
+      address: document.getElementById("agenda-address").value.trim() || "a definir",
+      schedule: document.getElementById("agenda-schedule").value.trim() || "a definir",
+      mapUrl: document.getElementById("agenda-map").value.trim(),
+      entradaGratuita: document.getElementById("agenda-gratuita").checked,
+      imageUrl: agendaAtual ? agendaAtual.imageUrl : "",
+      storagePath: agendaAtual ? agendaAtual.storagePath : ""
+    };
+
+    if (file) {
+      const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+      const path = `agenda-${Date.now()}.${ext}`;
+      const { error: upErr } = await sb.storage.from("agenda-fotos").upload(path, file);
+      if (upErr) throw upErr;
+      const { data: pub } = sb.storage.from("agenda-fotos").getPublicUrl(path);
+      const oldPath = agendaAtual ? agendaAtual.storagePath : "";
+      agenda.imageUrl = pub.publicUrl;
+      agenda.storagePath = path;
+      if (oldPath) await sb.storage.from("agenda-fotos").remove([oldPath]);
+    }
+
+    const { error } = await sb.from("agenda").upsert(agendaToRow(agenda));
+    if (error) throw error;
+    showFormMessage(msg, "Agenda atualizada!", true);
+    fileInput.value = "";
+    await loadAgendaForm();
+  } catch (err) {
+    console.error(err);
+    showFormMessage(msg, "Não foi possível salvar.", false);
+  } finally {
+    btn.disabled = false;
+  }
 });
 
 function showFormMessage(el, text, ok) {

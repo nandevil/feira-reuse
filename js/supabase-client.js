@@ -28,7 +28,10 @@ function rowToAgenda(r) {
     dateText: r.date_text || "",
     address: r.address || "a definir",
     schedule: r.schedule_text || "a definir",
-    mapUrl: r.map_url || ""
+    mapUrl: r.map_url || "",
+    imageUrl: r.image_url || "",
+    storagePath: r.storage_path || "",
+    entradaGratuita: r.entrada_gratuita !== false
   };
 }
 
@@ -39,7 +42,10 @@ function agendaToRow(a) {
     date_text: a.dateText,
     address: a.address,
     schedule_text: a.schedule,
-    map_url: a.mapUrl
+    map_url: a.mapUrl,
+    image_url: a.imageUrl,
+    storage_path: a.storagePath,
+    entrada_gratuita: a.entradaGratuita
   };
 }
 

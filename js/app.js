@@ -111,11 +111,36 @@ function renderStructuredData(agenda) {
   if (orgEl) orgEl.textContent = JSON.stringify(orgLd);
 }
 
+/* Card da agenda: imagem do mês (ou placeholder), data/horário/local,
+   selo "Entrada Gratuita" e o link "Ver no mapa". */
+function renderAgendaCard(agenda) {
+  const imageWrap = document.getElementById("agenda-image-wrap");
+  if (imageWrap) {
+    imageWrap.innerHTML = agenda.imageUrl
+      ? `<img src="${agenda.imageUrl}" alt="Imagem da agenda da Feira Reuse deste mês" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block"/>`
+      : `<div id="agenda-image-fallback" class="img-placeholder" style="width:100%;height:100%">Imagem da agenda em breve</div>`;
+  }
+
+  const dataEl = document.getElementById("agenda-data-texto");
+  const horarioEl = document.getElementById("agenda-horario-texto");
+  const localEl = document.getElementById("agenda-local-texto");
+  if (dataEl) dataEl.textContent = agenda.dateText || "a definir";
+  if (horarioEl) horarioEl.textContent = agenda.schedule || "a definir";
+  if (localEl) localEl.textContent = agenda.address || "a definir";
+
+  const badge = document.getElementById("agenda-gratuita-badge");
+  if (badge) badge.hidden = !agenda.entradaGratuita;
+
+  const mapLink = document.getElementById("agenda-card-map-link");
+  if (mapLink) mapLink.href = agenda.mapUrl || "#";
+}
+
 async function loadAgenda() {
   // Sem Supabase configurado, ainda assim popula o mapa/JSON-LD com os
   // valores padrão ("a definir") em vez de deixar tudo vazio.
-  const fallbackAgenda = { label: "A definir", dateText: "", address: "a definir", schedule: "a definir", mapUrl: "" };
+  const fallbackAgenda = { label: "A definir", dateText: "", address: "a definir", schedule: "a definir", mapUrl: "", imageUrl: "", entradaGratuita: true };
   if (!supabaseEnabled()) {
+    renderAgendaCard(fallbackAgenda);
     renderMap(fallbackAgenda);
     renderStructuredData(fallbackAgenda);
     return;
@@ -123,20 +148,14 @@ async function loadAgenda() {
 
   const { data, error } = await sb.from("agenda").select("*").eq("id", 1).maybeSingle();
   if (error || !data) {
+    renderAgendaCard(fallbackAgenda);
     renderMap(fallbackAgenda);
     renderStructuredData(fallbackAgenda);
     return;
   }
   const agenda = rowToAgenda(data);
 
-  const labelEl = document.getElementById("agenda-label");
-  const scheduleEl = document.getElementById("agenda-schedule");
-  if (labelEl) labelEl.textContent = agenda.dateText || agenda.label;
-  if (scheduleEl) {
-    scheduleEl.textContent = agenda.dateText
-      ? `${agenda.address} · ${agenda.schedule}`
-      : "Horário e local a confirmar · atualização mensal";
-  }
+  renderAgendaCard(agenda);
 
   const enderecoEl = document.getElementById("local-endereco");
   const dataHoraEl = document.getElementById("local-data-hora");

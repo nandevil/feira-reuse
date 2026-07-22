@@ -29,7 +29,10 @@ create table public.agenda (
   date_text text,
   address text,
   schedule_text text,
-  map_url text
+  map_url text,
+  image_url text not null default '',
+  storage_path text not null default '',
+  entrada_gratuita boolean not null default true
 );
 insert into public.agenda (id) values (1);
 
@@ -126,6 +129,16 @@ create policy "dono pode atualizar redes sociais"
   on public.redes_sociais for update to authenticated using (true) with check (true);
 ```
 
+> Se você já tinha criado a tabela `agenda` **antes** desta atualização
+> (sem as colunas de imagem e entrada gratuita), rode este bloco extra
+> uma vez no SQL Editor para adicioná-las sem perder os dados que já
+> estavam salvos:
+> ```sql
+> alter table public.agenda add column if not exists image_url text not null default '';
+> alter table public.agenda add column if not exists storage_path text not null default '';
+> alter table public.agenda add column if not exists entrada_gratuita boolean not null default true;
+> ```
+
 ## Passo 3 — Criar o bucket de fotos da galeria
 
 1. Menu **Storage → New bucket**. Nome: `galeria`. Marque **Public
@@ -180,7 +193,35 @@ create policy "dono pode apagar fotos de perfil"
   using (bucket_id = 'perfis');
 ```
 
-## Passo 5 — Criar o SEU usuário de acesso ao painel
+## Passo 5 — Criar o bucket da foto da agenda mensal
+
+1. Menu **Storage → New bucket**. Nome: `agenda-fotos`. Marque
+   **Public bucket**.
+2. Volte ao **SQL Editor**, cole o bloco abaixo e clique em **Run**:
+
+```sql
+create policy "leitura publica da foto da agenda"
+  on storage.objects for select
+  to public
+  using (bucket_id = 'agenda-fotos');
+
+create policy "dono pode enviar foto da agenda"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'agenda-fotos');
+
+create policy "dono pode atualizar foto da agenda"
+  on storage.objects for update
+  to authenticated
+  using (bucket_id = 'agenda-fotos') with check (bucket_id = 'agenda-fotos');
+
+create policy "dono pode apagar foto da agenda"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'agenda-fotos');
+```
+
+## Passo 6 — Criar o SEU usuário de acesso ao painel
 
 1. Menu **Authentication → Users → Add user → Create new user**.
 2. E-mail e senha forte de sua escolha (o e-mail que você vai usar
@@ -189,7 +230,7 @@ create policy "dono pode apagar fotos de perfil"
 4. Em **Authentication → Sign In / Up**, desative
    **Allow new users to sign up** (assim ninguém mais cria conta).
 
-## Passo 6 — Conectar o site
+## Passo 7 — Conectar o site
 
 1. Menu **Project Settings → API**. Copie:
    - **Project URL** (ex: `https://abcdefgh.supabase.co`)
