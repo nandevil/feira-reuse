@@ -60,6 +60,29 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 @media (max-width:1023px){
   .carousel-slide{flex:0 0 calc(50% - 10px)}
 }
+
+/* ===== Carrossel de informações (critérios / benefícios) — cards de
+   texto com ícone, ao invés de fotos. Uma coluna no celular, duas a
+   partir de tablet. As setas ficam ABAIXO do texto (não flutuam por
+   cima), pra não atrapalhar a leitura como aconteceria com o overlay
+   usado no carrossel de fotos. */
+.info-carousel-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.info-carousel-track::-webkit-scrollbar{display:none}
+.info-slide{flex:0 0 100%;min-width:0;scroll-snap-align:start}
+.info-card{display:flex;gap:14px;align-items:flex-start;text-align:left;height:100%;box-sizing:border-box;min-width:0}
+.info-card-body{min-width:0}
+.info-card--boxed{background:var(--creme-tint);border:1px solid color-mix(in oklch, var(--verde-selo) 25%, transparent);border-radius:16px;padding:22px}
+.info-card-icon{width:40px;height:40px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none;font-size:18px}
+.info-card-body h4{margin:0 0 6px;font-weight:700;font-size:16px;color:var(--verde-escuro)}
+.info-card-body p{margin:0;font-size:14px;line-height:1.6;color:color-mix(in oklch, var(--verde-escuro) 82%, transparent)}
+@media (min-width:700px){
+  .info-slide{flex:0 0 calc(50% - 10px)}
+}
+
+.carousel-controls{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:16px}
+.carousel-controls .carousel-dots{margin-top:0}
+.carousel-btn-inline{width:34px;height:34px;border-radius:50%;background:var(--verde-selo);color:var(--creme);border:none;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;flex:none}
+.carousel-btn-inline:hover{background:var(--verde-selo-600)}
 @media (max-width:640px){
   .carousel-slide{flex:0 0 100%;height:220px}
   .carousel-prev{left:8px}
@@ -73,7 +96,12 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 .social-pill-avatar{width:44px;height:44px;border-radius:50%;background:color-mix(in oklch, var(--creme) 18%, transparent);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}
 .social-pill-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .social-pill-label{font-family:'Anton',sans-serif;font-size:15px;letter-spacing:.02em;color:var(--creme);white-space:nowrap}
-.sobre-illustration{display:flex;align-items:center;justify-content:center}
+.sobre-illustration{display:flex;align-items:center;justify-content:center;min-width:0}
+
+/* Evita "grid blowout": sem isso, uma coluna de grid não encolhe
+   abaixo da largura mínima do seu conteúdo (carrossel, texto longo
+   etc.) e força a página inteira a estourar horizontalmente. */
+.hero-grid > *, .sobre-grid > *, .feirantes-grid > *, .feedback-grid > *{min-width:0}
 
 .nav-links{display:flex;gap:26px;align-items:center}
 .nav-links a{font-size:14px;font-weight:600;color:var(--verde-escuro)}
@@ -92,7 +120,7 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 @media (max-width:900px){
   .section{padding:64px 6vw}
   .hero-grid,.sobre-grid{grid-template-columns:1fr !important}
-  .feirantes-grid, .feedback-grid, .parcerias-grid{grid-template-columns:1fr !important}
+  .feirantes-grid, .feedback-grid{grid-template-columns:1fr !important}
   .contact-form{grid-template-columns:1fr !important}
   .nav-links{display:none}
   .admin-form-row{grid-template-columns:1fr !important}

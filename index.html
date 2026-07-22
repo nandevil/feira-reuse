@@ -120,24 +120,41 @@
       <h3 style="font-weight:400;font-size:24px;margin:0 0 14px;color:var(--verde-escuro)">Faça Parte da Nossa Feira</h3>
       <p style="font-size:15px;line-height:1.6;color:color-mix(in oklch, var(--verde-escuro) 85%, transparent);margin:0 0 22px">Quer expor seus produtos na Reuse Araruama? Oferecemos um espaço democrático e organizado para quem trabalha com moda circular, artesanato ou gastronomia.</p>
       <p class="kicker" style="margin:0 0 18px">Como funciona a nossa seleção</p>
-      <div style="display:flex;flex-direction:column;gap:18px">
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div style="width:32px;height:32px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+      <div class="carousel" id="sobre-criterios-carousel">
+        <div class="info-carousel-track" id="sobre-criterios-track">
+          <div class="info-slide">
+            <div class="info-card">
+              <div class="info-card-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.5" y2="16.5"/></svg>
+              </div>
+              <div class="info-card-body"><h4>Curadoria Cuidadosa</h4><p>Todos os expositores passam por uma avaliação técnica que preza pela qualidade, originalidade e apresentação das peças.</p></div>
+            </div>
           </div>
-          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--verde-escuro)"><strong style="font-weight:700">Curadoria Cuidadosa:</strong> Todos os expositores passam por uma avaliação técnica que preza pela qualidade, originalidade e apresentação das peças.</p>
+          <div class="info-slide">
+            <div class="info-card">
+              <div class="info-card-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+              </div>
+              <div class="info-card-body"><h4>Inclusão Social</h4><p>Reservamos vagas sociais gratuitas destinadas a pessoas em situação de vulnerabilidade ou instituições de caridade parceiras.</p></div>
+            </div>
+          </div>
+          <div class="info-slide">
+            <div class="info-card">
+              <div class="info-card-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.5 9a9 9 0 0114.85-3.36L23 10M1 14l4.65 4.36A9 9 0 0020.5 15"/></svg>
+              </div>
+              <div class="info-card-body"><h4>Rotatividade</h4><p>Renovamos nossa lista de expositores periodicamente para dar oportunidade a novos talentos e manter a feira sempre cheia de novidades!</p></div>
+            </div>
+          </div>
         </div>
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div style="width:32px;height:32px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg>
+        <div class="carousel-controls">
+          <button type="button" class="carousel-btn-inline" id="sobre-criterios-prev" aria-label="Critério anterior">‹</button>
+          <div class="carousel-dots" id="sobre-criterios-dots">
+            <button type="button" class="carousel-dot active" data-i="0" aria-label="Ir para o critério 1"></button>
+            <button type="button" class="carousel-dot" data-i="1" aria-label="Ir para o critério 2"></button>
+            <button type="button" class="carousel-dot" data-i="2" aria-label="Ir para o critério 3"></button>
           </div>
-          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--verde-escuro)"><strong style="font-weight:700">Inclusão Social:</strong> Reservamos vagas sociais gratuitas destinadas a pessoas em situação de vulnerabilidade ou instituições de caridade parceiras.</p>
-        </div>
-        <div style="display:flex;gap:14px;align-items:flex-start">
-          <div style="width:32px;height:32px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.5 9a9 9 0 0114.85-3.36L23 10M1 14l4.65 4.36A9 9 0 0020.5 15"/></svg>
-          </div>
-          <p style="margin:0;font-size:15px;line-height:1.6;color:var(--verde-escuro)"><strong style="font-weight:700">Rotatividade:</strong> Renovamos nossa lista de expositores periodicamente para dar oportunidade a novos talentos e manter a feira sempre cheia de novidades!</p>
+          <button type="button" class="carousel-btn-inline" id="sobre-criterios-next" aria-label="Próximo critério">›</button>
         </div>
       </div>
     </div>
@@ -227,56 +244,74 @@
           <div style="width:34px;height:34px;border-radius:50%;background:var(--creme);color:var(--verde-escuro);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;flex:none">3</div>
           <div><strong style="font-weight:400;font-size:17px;color:var(--creme);font-family:'Anton',sans-serif">Monte sua barraca</strong><p style="margin:6px 0 0;color:color-mix(in oklch, var(--creme) 78%, transparent)">Chegue no dia combinado e faça parte da Feira Reuse.</p></div>
         </div>
+        <div style="margin-top:8px">
+          <p style="margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--creme)">Categorias que aceitamos</p>
+          <div style="display:flex;flex-wrap:wrap;gap:12px">
+            <span class="plank">Vestuário</span>
+            <span class="plank">Alimentação</span>
+            <span class="plank">Artesanato</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <p style="margin:44px 0 12px;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--creme)">Categorias que aceitamos</p>
-    <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center">
-      <span class="plank">Vestuário</span>
-      <span class="plank">Alimentação</span>
-      <span class="plank">Artesanato</span>
     </div>
   </section>
 
-  <section id="parcerias" class="section" style="background:var(--verde-escuro)">
-    <span class="kicker" style="color:var(--creme)">Nossa história</span>
-    <div class="stripe" style="border-color:var(--creme)"></div>
-    <h2 class="h" style="color:var(--creme)">Nossa História &amp; Parcerias</h2>
+  <section id="parcerias" class="section">
+    <span class="kicker">Nossa história</span>
+    <div class="stripe"></div>
+    <h2 class="h">Nossa História &amp; Parcerias</h2>
 
     <div style="max-width:720px;margin:0 auto 56px">
-      <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--creme);margin:0 0 16px">Como tudo começou</h3>
-      <p style="font-size:16px;line-height:1.7;color:color-mix(in oklch, var(--creme) 88%, transparent);margin:0 0 16px">A Feira Reuse Araruama nasceu no período pós-pandemia como uma resposta de afeto, união e solidariedade. Em um momento em que muitos pequenos empreendedores locais enfrentavam a perda de familiares, o desemprego ou o desafio de recomeçar, a feira surgiu para estender a mão e abrir caminhos na Região dos Lagos.</p>
-      <p style="font-size:16px;line-height:1.7;color:color-mix(in oklch, var(--creme) 88%, transparent);margin:0">O que começou como uma rede de apoio mútuo rapidamente se transformou em um movimento vivo de transformação social, cultural e econômica. Hoje, consolidada sobre os pilares da Moda Circular, Artesanato Autoral e Gastronomia, a feira promove encontros periódicos, com entrada gratuita, gerando oportunidade, renda e consumo consciente.</p>
+      <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Como tudo começou</h3>
+      <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0 0 16px">A Feira Reuse Araruama nasceu no período pós-pandemia como uma resposta de afeto, união e solidariedade. Em um momento em que muitos pequenos empreendedores locais enfrentavam a perda de familiares, o desemprego ou o desafio de recomeçar, a feira surgiu para estender a mão e abrir caminhos na Região dos Lagos.</p>
+      <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0">O que começou como uma rede de apoio mútuo rapidamente se transformou em um movimento vivo de transformação social, cultural e econômica. Hoje, consolidada sobre os pilares da Moda Circular, Artesanato Autoral e Gastronomia, a feira promove encontros periódicos, com entrada gratuita, gerando oportunidade, renda e consumo consciente.</p>
     </div>
 
     <div style="max-width:720px;margin:0 auto">
-      <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--creme);margin:0 0 16px">Por que ser um parceiro do projeto?</h3>
-      <p style="font-size:16px;line-height:1.7;color:color-mix(in oklch, var(--creme) 88%, transparent);margin:0 0 40px">Apoiar a Reuse Araruama é fazer parte de um movimento que transforma a comunidade e movimenta a economia da nossa região. Ao associar sua marca ou instituição ao nosso projeto, sua empresa garante:</p>
+      <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Por que ser um parceiro do projeto?</h3>
+      <p style="font-size:16px;line-height:1.7;color:var(--verde-escuro);margin:0 0 40px">Apoiar a Reuse Araruama é fazer parte de um movimento que transforma a comunidade e movimenta a economia da nossa região. Ao associar sua marca ou instituição ao nosso projeto, sua empresa garante:</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:24px;max-width:820px;margin:0 auto 48px" class="parcerias-grid">
-      <div class="card" style="background:var(--creme);padding:26px">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px">🌿</div>
-        <h3 style="font-weight:400;font-size:16px;margin:0 0 8px;color:var(--verde-escuro)">Compromisso com o Impacto Social e Ambiental</h3>
-        <p style="margin:0;color:color-mix(in oklch, var(--verde-escuro) 82%, transparent);line-height:1.6;font-size:14px">Sua marca conectada diretamente a pautas de sustentabilidade, upcycling, economia circular e inclusão de empreendedores locais.</p>
+    <div class="carousel" id="parcerias-carousel" style="max-width:820px;margin:0 auto 48px">
+      <div class="info-carousel-track" id="parcerias-track">
+        <div class="info-slide">
+          <div class="info-card info-card--boxed">
+            <div class="info-card-icon" style="font-size:18px">🌿</div>
+            <div class="info-card-body"><h4>Compromisso com o Impacto Social e Ambiental</h4><p>Sua marca conectada diretamente a pautas de sustentabilidade, upcycling, economia circular e inclusão de empreendedores locais.</p></div>
+          </div>
+        </div>
+        <div class="info-slide">
+          <div class="info-card info-card--boxed">
+            <div class="info-card-icon" style="font-size:18px">📣</div>
+            <div class="info-card-body"><h4>Visibilidade e Alcance</h4><p>Destaque contínuo na comunicação da feira — site oficial, redes sociais, materiais impressos e sinalização visual durante os eventos presenciais.</p></div>
+          </div>
+        </div>
+        <div class="info-slide">
+          <div class="info-card info-card--boxed">
+            <div class="info-card-icon" style="font-size:18px">🤝</div>
+            <div class="info-card-body"><h4>Conexão Direta com a Comunidade</h4><p>Proximidade com um público engajado, que valoriza a cultura local, o consumo consciente e o desenvolvimento de Araruama.</p></div>
+          </div>
+        </div>
+        <div class="info-slide">
+          <div class="info-card info-card--boxed">
+            <div class="info-card-icon" style="font-size:18px">🏛️</div>
+            <div class="info-card-body"><h4>Fomento ao Turismo e Cultura</h4><p>Apoio na consolidação da cidade como um polo de turismo sustentável e de feiras criativas na Região dos Lagos.</p></div>
+          </div>
+        </div>
       </div>
-      <div class="card" style="background:var(--creme);padding:26px">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px">📣</div>
-        <h3 style="font-weight:400;font-size:16px;margin:0 0 8px;color:var(--verde-escuro)">Visibilidade e Alcance</h3>
-        <p style="margin:0;color:color-mix(in oklch, var(--verde-escuro) 82%, transparent);line-height:1.6;font-size:14px">Destaque contínuo na comunicação da feira — site oficial, redes sociais, materiais impressos e sinalização visual durante os eventos presenciais.</p>
-      </div>
-      <div class="card" style="background:var(--creme);padding:26px">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px">🤝</div>
-        <h3 style="font-weight:400;font-size:16px;margin:0 0 8px;color:var(--verde-escuro)">Conexão Direta com a Comunidade</h3>
-        <p style="margin:0;color:color-mix(in oklch, var(--verde-escuro) 82%, transparent);line-height:1.6;font-size:14px">Proximidade com um público engajado, que valoriza a cultura local, o consumo consciente e o desenvolvimento de Araruama.</p>
-      </div>
-      <div class="card" style="background:var(--creme);padding:26px">
-        <div style="width:52px;height:52px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:22px">🏛️</div>
-        <h3 style="font-weight:400;font-size:16px;margin:0 0 8px;color:var(--verde-escuro)">Fomento ao Turismo e Cultura</h3>
-        <p style="margin:0;color:color-mix(in oklch, var(--verde-escuro) 82%, transparent);line-height:1.6;font-size:14px">Apoio na consolidação da cidade como um polo de turismo sustentável e de feiras criativas na Região dos Lagos.</p>
+      <div class="carousel-controls">
+        <button type="button" class="carousel-btn-inline" id="parcerias-prev" aria-label="Benefício anterior">‹</button>
+        <div class="carousel-dots" id="parcerias-dots">
+          <button type="button" class="carousel-dot active" data-i="0" aria-label="Ir para o benefício 1"></button>
+          <button type="button" class="carousel-dot" data-i="1" aria-label="Ir para o benefício 2"></button>
+          <button type="button" class="carousel-dot" data-i="2" aria-label="Ir para o benefício 3"></button>
+          <button type="button" class="carousel-dot" data-i="3" aria-label="Ir para o benefício 4"></button>
+        </div>
+        <button type="button" class="carousel-btn-inline" id="parcerias-next" aria-label="Próximo benefício">›</button>
       </div>
     </div>
 
-    <div class="card" style="background:var(--creme);max-width:520px;margin:0 auto;padding:36px">
+    <div class="card" style="max-width:520px;margin:0 auto;padding:36px">
       <h3 style="font-weight:400;font-size:20px;margin:0 0 10px;color:var(--verde-escuro)">Vamos construir isso juntos?</h3>
       <p style="margin:0 0 22px;color:color-mix(in oklch, var(--verde-escuro) 82%, transparent);line-height:1.6">Fale com a organização e leve sua marca para dentro da Feira Reuse Araruama.</p>
       <a href="#" data-whatsapp-link target="_blank" rel="noopener" class="btn btn-primary">Seja um Parceiro</a>

@@ -279,10 +279,24 @@ function setupFeiranteForm() {
   });
 }
 
+/* Carrosséis de conteúdo estático (critérios de seleção, benefícios de
+   parceria) — o HTML dos slides já vem pronto na página, só liga a
+   navegação (mesma lógica da galeria). */
+function setupStaticCarousel(trackId, dotsId, prevId, nextId) {
+  const track = document.getElementById(trackId);
+  const dotsWrap = document.getElementById(dotsId);
+  const prevBtn = document.getElementById(prevId);
+  const nextBtn = document.getElementById(nextId);
+  if (!track) return;
+  setupCarouselNav(track, dotsWrap, prevBtn, nextBtn);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   loadAgenda();
   loadGaleria();
   loadRedesSociais();
   setupAviseMeForm();
   setupFeiranteForm();
+  setupStaticCarousel("sobre-criterios-track", "sobre-criterios-dots", "sobre-criterios-prev", "sobre-criterios-next");
+  setupStaticCarousel("parcerias-track", "parcerias-dots", "parcerias-prev", "parcerias-next");
 });
