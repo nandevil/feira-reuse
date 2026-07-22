@@ -51,12 +51,24 @@ create table public.feirantes (
   status text not null default 'novo'
 );
 
+-- Fotos do carrossel "Galeria" (gerenciadas pelo painel, quantidade livre)
+create table public.galeria (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  image_url text not null,
+  storage_path text not null,
+  caption text not null default '',
+  posicao int not null default 0
+);
+
 alter table public.agenda enable row level security;
 alter table public.inscricoes enable row level security;
 alter table public.feirantes enable row level security;
+alter table public.galeria enable row level security;
 alter table public.agenda force row level security;
 alter table public.inscricoes force row level security;
 alter table public.feirantes force row level security;
+alter table public.galeria force row level security;
 
 -- Qualquer visitante pode LER a agenda (aparece na landing page)
 create policy "todos podem ler agenda"
@@ -81,9 +93,47 @@ create policy "dono pode ler feirantes"
   on public.feirantes for select to authenticated using (true);
 create policy "dono pode apagar feirantes"
   on public.feirantes for delete to authenticated using (true);
+
+-- Qualquer visitante pode LER a galeria (aparece no carrossel da home)
+create policy "todos podem ler galeria"
+  on public.galeria for select to anon using (true);
+
+-- Apenas você (logado) pode ADICIONAR, EDITAR e APAGAR fotos da galeria
+create policy "dono pode inserir galeria"
+  on public.galeria for insert to authenticated with check (true);
+create policy "dono pode atualizar galeria"
+  on public.galeria for update to authenticated using (true) with check (true);
+create policy "dono pode apagar galeria"
+  on public.galeria for delete to authenticated using (true);
 ```
 
-## Passo 3 — Criar o SEU usuário de acesso ao painel
+## Passo 3 — Criar o bucket de fotos da galeria
+
+1. Menu **Storage → New bucket**. Nome: `galeria`. Marque **Public
+   bucket** (assim as fotos aparecem no carrossel do site sem precisar
+   de login).
+2. Volte ao **SQL Editor**, cole o bloco abaixo e clique em **Run**
+   (essas políticas fazem para os ARQUIVOS o mesmo que as políticas
+   acima fazem para a tabela `galeria`):
+
+```sql
+create policy "leitura publica das fotos da galeria"
+  on storage.objects for select
+  to public
+  using (bucket_id = 'galeria');
+
+create policy "dono pode enviar fotos da galeria"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'galeria');
+
+create policy "dono pode apagar fotos da galeria"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'galeria');
+```
+
+## Passo 4 — Criar o SEU usuário de acesso ao painel
 
 1. Menu **Authentication → Users → Add user → Create new user**.
 2. E-mail e senha forte de sua escolha (o e-mail que você vai usar
@@ -92,7 +142,7 @@ create policy "dono pode apagar feirantes"
 4. Em **Authentication → Sign In / Up**, desative
    **Allow new users to sign up** (assim ninguém mais cria conta).
 
-## Passo 4 — Conectar o site
+## Passo 5 — Conectar o site
 
 1. Menu **Project Settings → API**. Copie:
    - **Project URL** (ex: `https://abcdefgh.supabase.co`)

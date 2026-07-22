@@ -64,3 +64,15 @@ function rowToFeirante(r) {
     status: r.status || "novo"
   };
 }
+
+/* Foto do carrossel "Galeria" (tabela public.galeria) */
+function rowToGaleria(r) {
+  return {
+    id: r.id,
+    createdAt: r.created_at,
+    imageUrl: r.image_url,
+    storagePath: r.storage_path,
+    caption: r.caption || "",
+    posicao: Number.isFinite(r.posicao) ? r.posicao : 0
+  };
+}

@@ -100,6 +100,27 @@
       </div>
     </div>
 
+    <div class="admin-card">
+      <h2>Galeria (<span id="galeria-count">0</span>)</h2>
+      <div id="galeria-local-msg" class="admin-empty" hidden>Configure o Supabase (veja SETUP.md) para gerenciar as fotos da galeria — enviar imagens precisa de um back-end.</div>
+      <div id="galeria-manage">
+        <form id="galeria-upload-form" style="display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end;margin-bottom:20px">
+          <div style="flex:1;min-width:200px">
+            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Foto</label>
+            <input type="file" id="galeria-file" accept="image/png,image/jpeg,image/webp" required/>
+          </div>
+          <div style="flex:1;min-width:200px">
+            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Legenda (opcional)</label>
+            <input type="text" id="galeria-caption" placeholder="Ex: Feira de julho de 2026"/>
+          </div>
+          <button type="submit" class="btn btn-primary">Adicionar foto</button>
+        </form>
+        <p id="galeria-msg" class="form-msg" role="status"></p>
+        <div id="galeria-empty" class="admin-empty" hidden>Nenhuma foto adicionada ainda.</div>
+        <div id="galeria-list" style="display:flex;flex-direction:column;gap:12px"></div>
+      </div>
+    </div>
+
   </main>
 </div>
 

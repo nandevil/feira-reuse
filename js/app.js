@@ -129,6 +129,82 @@ async function loadAgenda() {
   renderStructuredData(agenda);
 }
 
+function escapeHtml(s) {
+  return String(s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+/* Carrossel da galeria — busca as fotos cadastradas no painel (tabela
+   public.galeria) e monta os slides. Sem Supabase configurado (ou sem
+   fotos ainda), mantém o placeholder que já está no HTML. */
+async function loadGaleria() {
+  const track = document.getElementById("galeria-track");
+  const dotsWrap = document.getElementById("galeria-dots");
+  const prevBtn = document.getElementById("galeria-prev");
+  const nextBtn = document.getElementById("galeria-next");
+  if (!track) return;
+
+  let items = [];
+  if (supabaseEnabled()) {
+    const { data, error } = await sb.from("galeria").select("*").order("posicao", { ascending: true });
+    if (!error && data) items = data.map(rowToGaleria);
+  }
+
+  if (!items.length) {
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+    dotsWrap.innerHTML = "";
+    return; // mantém o slide de placeholder que já está no HTML
+  }
+
+  prevBtn.style.display = "";
+  nextBtn.style.display = "";
+  track.innerHTML = items.map((it) => `
+    <div class="carousel-slide">
+      <img src="${it.imageUrl}" alt="${escapeHtml(it.caption || "Foto da Feira Reuse")}" loading="lazy"/>
+      ${it.caption ? `<div class="carousel-caption">${escapeHtml(it.caption)}</div>` : ""}
+    </div>`).join("");
+  dotsWrap.innerHTML = items.map((_, i) =>
+    `<button type="button" class="carousel-dot${i === 0 ? " active" : ""}" data-i="${i}" aria-label="Ir para foto ${i + 1}"></button>`
+  ).join("");
+
+  setupCarouselNav(track, dotsWrap, prevBtn, nextBtn);
+}
+
+function setupCarouselNav(track, dotsWrap, prevBtn, nextBtn) {
+  const slides = [...track.children];
+  const dots = [...dotsWrap.children];
+
+  function currentIndex() {
+    const trackRect = track.getBoundingClientRect();
+    const center = trackRect.left + trackRect.width / 2;
+    let closest = 0, closestDist = Infinity;
+    slides.forEach((s, i) => {
+      const r = s.getBoundingClientRect();
+      const dist = Math.abs(r.left + r.width / 2 - center);
+      if (dist < closestDist) { closestDist = dist; closest = i; }
+    });
+    return closest;
+  }
+
+  function goTo(i) {
+    const idx = Math.max(0, Math.min(slides.length - 1, i));
+    slides[idx].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }
+
+  prevBtn.onclick = () => goTo(currentIndex() - 1);
+  nextBtn.onclick = () => goTo(currentIndex() + 1);
+  dots.forEach((d, i) => { d.onclick = () => goTo(i); });
+
+  let scrollTimeout;
+  track.addEventListener("scroll", () => {
+    clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      const idx = currentIndex();
+      dots.forEach((d, i) => d.classList.toggle("active", i === idx));
+    }, 100);
+  });
+}
+
 function showFormMessage(el, text, ok) {
   el.textContent = text;
   el.className = "form-msg " + (ok ? "ok" : "err");
@@ -205,6 +281,7 @@ function setupFeiranteForm() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadAgenda();
+  loadGaleria();
   setupAviseMeForm();
   setupFeiranteForm();
 });

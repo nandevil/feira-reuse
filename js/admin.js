@@ -27,6 +27,8 @@ async function init() {
     loginView.hidden = true;
     document.getElementById("logout-btn").hidden = true;
     document.getElementById("agenda-form").querySelector("button").disabled = true;
+    document.getElementById("galeria-manage").hidden = true;
+    document.getElementById("galeria-local-msg").hidden = false;
     loadLocalLists();
     return;
   }
@@ -47,6 +49,7 @@ function showApp() {
   loadAgendaForm();
   loadInscricoes();
   loadFeirantes();
+  loadGaleria();
 }
 
 document.getElementById("login-form").addEventListener("submit", async (e) => {
@@ -158,6 +161,112 @@ function loadLocalLists() {
 
 function escapeHtml(s) {
   return String(s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+/* ===== Galeria (carrossel da home) ===== */
+let galeriaItems = [];
+
+async function loadGaleria() {
+  const { data, error } = await sb.from("galeria").select("*").order("posicao", { ascending: true });
+  galeriaItems = (error || !data) ? [] : data.map(rowToGaleria);
+  renderGaleriaList();
+}
+
+function galeriaRowHtml(item, index, total) {
+  return `<div class="galeria-row" data-id="${item.id}" style="display:flex;align-items:center;gap:12px;padding:10px;border:1px solid color-mix(in oklch, var(--verde-selo) 20%, transparent);border-radius:10px">
+    <img src="${item.imageUrl}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex:none"/>
+    <input type="text" class="galeria-caption-input" value="${escapeHtml(item.caption)}" placeholder="Legenda" style="flex:1;border:2px solid color-mix(in oklch, var(--verde-selo) 30%, transparent);border-radius:8px;padding:8px 10px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--verde-escuro)"/>
+    <button type="button" class="btn btn-secondary galeria-up" ${index === 0 ? "disabled" : ""} title="Mover para cima" style="padding:6px 10px">↑</button>
+    <button type="button" class="btn btn-secondary galeria-down" ${index === total - 1 ? "disabled" : ""} title="Mover para baixo" style="padding:6px 10px">↓</button>
+    <button type="button" class="btn btn-secondary galeria-delete" title="Excluir" style="padding:6px 10px;border-color:#b3261e;color:#b3261e">Excluir</button>
+  </div>`;
+}
+
+function renderGaleriaList() {
+  document.getElementById("galeria-count").textContent = galeriaItems.length;
+  document.getElementById("galeria-empty").hidden = galeriaItems.length > 0;
+  const list = document.getElementById("galeria-list");
+  list.innerHTML = galeriaItems.map((it, i) => galeriaRowHtml(it, i, galeriaItems.length)).join("");
+}
+
+document.getElementById("galeria-upload-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const fileInput = document.getElementById("galeria-file");
+  const captionInput = document.getElementById("galeria-caption");
+  const msg = document.getElementById("galeria-msg");
+  const file = fileInput.files[0];
+  if (!file) return;
+
+  const btn = e.target.querySelector("button");
+  btn.disabled = true;
+  try {
+    const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+    const path = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const { error: upErr } = await sb.storage.from("galeria").upload(path, file);
+    if (upErr) throw upErr;
+    const { data: pub } = sb.storage.from("galeria").getPublicUrl(path);
+    const nextPos = galeriaItems.length ? Math.max(...galeriaItems.map((i) => i.posicao)) + 1 : 0;
+    const { error: insErr } = await sb.from("galeria").insert({
+      image_url: pub.publicUrl,
+      storage_path: path,
+      caption: captionInput.value.trim(),
+      posicao: nextPos
+    });
+    if (insErr) throw insErr;
+    showFormMessage(msg, "Foto adicionada!", true);
+    fileInput.value = "";
+    captionInput.value = "";
+    await loadGaleria();
+  } catch (err) {
+    console.error(err);
+    showFormMessage(msg, "Não foi possível enviar a foto.", false);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
+document.getElementById("galeria-list").addEventListener("blur", async (e) => {
+  if (!e.target.classList || !e.target.classList.contains("galeria-caption-input")) return;
+  const row = e.target.closest(".galeria-row");
+  const id = row.dataset.id;
+  const item = galeriaItems.find((i) => String(i.id) === String(id));
+  if (!item) return;
+  const newCaption = e.target.value.trim();
+  if (newCaption === item.caption) return;
+  item.caption = newCaption;
+  await sb.from("galeria").update({ caption: newCaption }).eq("id", id);
+}, true);
+
+document.getElementById("galeria-list").addEventListener("click", async (e) => {
+  const row = e.target.closest(".galeria-row");
+  if (!row) return;
+  const id = row.dataset.id;
+  const idx = galeriaItems.findIndex((i) => String(i.id) === String(id));
+  if (idx < 0) return;
+
+  if (e.target.classList.contains("galeria-delete")) {
+    if (!confirm("Excluir esta foto da galeria?")) return;
+    const item = galeriaItems[idx];
+    await sb.storage.from("galeria").remove([item.storagePath]);
+    await sb.from("galeria").delete().eq("id", id);
+    await loadGaleria();
+    return;
+  }
+  if (e.target.classList.contains("galeria-up") && idx > 0) {
+    await swapGaleriaPosicao(idx, idx - 1);
+  }
+  if (e.target.classList.contains("galeria-down") && idx < galeriaItems.length - 1) {
+    await swapGaleriaPosicao(idx, idx + 1);
+  }
+});
+
+async function swapGaleriaPosicao(i, j) {
+  const a = galeriaItems[i], b = galeriaItems[j];
+  await Promise.all([
+    sb.from("galeria").update({ posicao: b.posicao }).eq("id", a.id),
+    sb.from("galeria").update({ posicao: a.posicao }).eq("id", b.id)
+  ]);
+  await loadGaleria();
 }
 
 init();
