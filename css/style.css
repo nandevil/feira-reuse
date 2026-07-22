@@ -104,7 +104,6 @@ details[open] .faq-chevron{transform:rotate(180deg)}
   .contact-form{grid-template-columns:1fr !important}
   .nav-links{display:none}
   .admin-form-row{grid-template-columns:1fr !important}
-  .sobre-illustration{order:-1;margin-bottom:8px}
   .social-row{flex-direction:column;width:100%}
   .social-pill{width:100%}
 }
