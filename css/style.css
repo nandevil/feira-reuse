@@ -55,8 +55,8 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 .carousel-prev{left:-12px}
 .carousel-next{right:-12px}
 .carousel-dots{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:16px}
-.carousel-dot{width:8px;height:8px;border-radius:50%;background:color-mix(in oklch, var(--creme) 40%, transparent);border:none;cursor:pointer;padding:0}
-.carousel-dot.active{background:var(--creme)}
+.carousel-dot{width:8px;height:8px;border-radius:50%;background:color-mix(in oklch, var(--verde-selo) 35%, transparent);border:none;cursor:pointer;padding:0}
+.carousel-dot.active{background:var(--verde-selo)}
 @media (max-width:1023px){
   .carousel-slide{flex:0 0 calc(50% - 10px)}
 }
