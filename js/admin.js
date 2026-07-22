@@ -29,6 +29,8 @@ async function init() {
     document.getElementById("agenda-form").querySelector("button").disabled = true;
     document.getElementById("galeria-manage").hidden = true;
     document.getElementById("galeria-local-msg").hidden = false;
+    document.getElementById("redes-manage").hidden = true;
+    document.getElementById("redes-local-msg").hidden = false;
     loadLocalLists();
     return;
   }
@@ -50,6 +52,7 @@ function showApp() {
   loadInscricoes();
   loadFeirantes();
   loadGaleria();
+  loadRedesSociais();
 }
 
 document.getElementById("login-form").addEventListener("submit", async (e) => {
@@ -268,5 +271,61 @@ async function swapGaleriaPosicao(i, j) {
   ]);
   await loadGaleria();
 }
+
+/* ===== Redes sociais (link + foto de perfil de cada rede) ===== */
+async function loadRedesSociais() {
+  const { data, error } = await sb.from("redes_sociais").select("*");
+  const redes = (error || !data) ? [] : data.map(rowToRedeSocial);
+  document.querySelectorAll(".rede-social-row").forEach((row) => {
+    const id = row.dataset.rede;
+    const rede = redes.find((r) => r.id === id);
+    row.querySelector(".rede-url-input").value = rede ? rede.url : "";
+    const preview = row.querySelector(".rede-avatar-preview");
+    preview.innerHTML = rede && rede.fotoUrl
+      ? `<img src="${rede.fotoUrl}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"/>`
+      : "";
+  });
+}
+
+document.querySelectorAll(".rede-save-btn").forEach((btn) => {
+  btn.addEventListener("click", async () => {
+    const row = btn.closest(".rede-social-row");
+    const id = row.dataset.rede;
+    const urlInput = row.querySelector(".rede-url-input");
+    const fileInput = row.querySelector(".rede-file-input");
+    const msg = row.querySelector(".rede-msg");
+    const file = fileInput.files[0];
+
+    btn.disabled = true;
+    try {
+      const update = { url: urlInput.value.trim() };
+
+      if (file) {
+        const { data: current } = await sb.from("redes_sociais").select("storage_path").eq("id", id).maybeSingle();
+        const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
+        const path = `${id}-${Date.now()}.${ext}`;
+        const { error: upErr } = await sb.storage.from("perfis").upload(path, file);
+        if (upErr) throw upErr;
+        const { data: pub } = sb.storage.from("perfis").getPublicUrl(path);
+        update.foto_url = pub.publicUrl;
+        update.storage_path = path;
+        if (current && current.storage_path) {
+          await sb.storage.from("perfis").remove([current.storage_path]);
+        }
+      }
+
+      const { error } = await sb.from("redes_sociais").update(update).eq("id", id);
+      if (error) throw error;
+      showFormMessage(msg, "Salvo!", true);
+      fileInput.value = "";
+      await loadRedesSociais();
+    } catch (err) {
+      console.error(err);
+      showFormMessage(msg, "Não foi possível salvar.", false);
+    } finally {
+      btn.disabled = false;
+    }
+  });
+});
 
 init();

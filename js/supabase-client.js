@@ -76,3 +76,13 @@ function rowToGaleria(r) {
     posicao: Number.isFinite(r.posicao) ? r.posicao : 0
   };
 }
+
+/* Link + foto de perfil de uma rede social (tabela public.redes_sociais) */
+function rowToRedeSocial(r) {
+  return {
+    id: r.id,
+    url: r.url || "",
+    fotoUrl: r.foto_url || "",
+    storagePath: r.storage_path || ""
+  };
+}

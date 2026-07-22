@@ -13,6 +13,27 @@ function writeLocalList(key, list) {
   localStorage.setItem(key, JSON.stringify(list));
 }
 
+/* Links + fotos de perfil do Instagram/Facebook/TikTok, editáveis no
+   painel (tabela public.redes_sociais). Sem Supabase configurado, os
+   links de js/config.js (já aplicados por applyFeiraConfigLinks) continuam
+   valendo, e os avatares mantêm o ícone genérico. */
+async function loadRedesSociais() {
+  if (!supabaseEnabled()) return;
+  const { data, error } = await sb.from("redes_sociais").select("*");
+  if (error || !data) return;
+
+  data.map(rowToRedeSocial).forEach((rede) => {
+    if (rede.url) {
+      document.querySelectorAll(`[data-social="${rede.id}"]`).forEach((el) => { el.href = rede.url; });
+    }
+    if (rede.fotoUrl) {
+      document.querySelectorAll(`[data-social-avatar="${rede.id}"]`).forEach((el) => {
+        el.innerHTML = `<img src="${rede.fotoUrl}" alt="Foto de perfil do ${rede.id}" loading="lazy"/>`;
+      });
+    }
+  });
+}
+
 /* Deriva uma URL de embed do Google Maps a partir do link salvo na agenda
    (agenda-map). Se o link já for um embed, usa direto; se tiver um "q="
    reaproveita a busca; senão, cai para o endereço em texto — sempre sem
@@ -282,6 +303,7 @@ function setupFeiranteForm() {
 document.addEventListener("DOMContentLoaded", () => {
   loadAgenda();
   loadGaleria();
+  loadRedesSociais();
   setupAviseMeForm();
   setupFeiranteForm();
 });

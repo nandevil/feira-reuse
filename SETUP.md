@@ -61,14 +61,25 @@ create table public.galeria (
   posicao int not null default 0
 );
 
+-- Links + foto de perfil do Instagram/Facebook/TikTok da feira
+create table public.redes_sociais (
+  id text primary key check (id in ('instagram','facebook','tiktok')),
+  url text not null default '',
+  foto_url text not null default '',
+  storage_path text not null default ''
+);
+insert into public.redes_sociais (id) values ('instagram'), ('facebook'), ('tiktok');
+
 alter table public.agenda enable row level security;
 alter table public.inscricoes enable row level security;
 alter table public.feirantes enable row level security;
 alter table public.galeria enable row level security;
+alter table public.redes_sociais enable row level security;
 alter table public.agenda force row level security;
 alter table public.inscricoes force row level security;
 alter table public.feirantes force row level security;
 alter table public.galeria force row level security;
+alter table public.redes_sociais force row level security;
 
 -- Qualquer visitante pode LER a agenda (aparece na landing page)
 create policy "todos podem ler agenda"
@@ -105,6 +116,14 @@ create policy "dono pode atualizar galeria"
   on public.galeria for update to authenticated using (true) with check (true);
 create policy "dono pode apagar galeria"
   on public.galeria for delete to authenticated using (true);
+
+-- Qualquer visitante pode LER os links/fotos das redes sociais
+create policy "todos podem ler redes sociais"
+  on public.redes_sociais for select to anon using (true);
+
+-- Apenas você (logado) pode ATUALIZAR os links/fotos das redes sociais
+create policy "dono pode atualizar redes sociais"
+  on public.redes_sociais for update to authenticated using (true) with check (true);
 ```
 
 ## Passo 3 — Criar o bucket de fotos da galeria
@@ -133,7 +152,35 @@ create policy "dono pode apagar fotos da galeria"
   using (bucket_id = 'galeria');
 ```
 
-## Passo 4 — Criar o SEU usuário de acesso ao painel
+## Passo 4 — Criar o bucket de fotos de perfil das redes sociais
+
+1. Menu **Storage → New bucket**. Nome: `perfis`. Marque **Public
+   bucket**.
+2. Volte ao **SQL Editor**, cole o bloco abaixo e clique em **Run**:
+
+```sql
+create policy "leitura publica das fotos de perfil"
+  on storage.objects for select
+  to public
+  using (bucket_id = 'perfis');
+
+create policy "dono pode enviar fotos de perfil"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'perfis');
+
+create policy "dono pode atualizar fotos de perfil"
+  on storage.objects for update
+  to authenticated
+  using (bucket_id = 'perfis') with check (bucket_id = 'perfis');
+
+create policy "dono pode apagar fotos de perfil"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'perfis');
+```
+
+## Passo 5 — Criar o SEU usuário de acesso ao painel
 
 1. Menu **Authentication → Users → Add user → Create new user**.
 2. E-mail e senha forte de sua escolha (o e-mail que você vai usar
@@ -142,7 +189,7 @@ create policy "dono pode apagar fotos da galeria"
 4. Em **Authentication → Sign In / Up**, desative
    **Allow new users to sign up** (assim ninguém mais cria conta).
 
-## Passo 5 — Conectar o site
+## Passo 6 — Conectar o site
 
 1. Menu **Project Settings → API**. Copie:
    - **Project URL** (ex: `https://abcdefgh.supabase.co`)

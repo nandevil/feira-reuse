@@ -79,6 +79,52 @@
     </div>
 
     <div class="admin-card">
+      <h2>Redes sociais</h2>
+      <div id="redes-local-msg" class="admin-empty" hidden>Configure o Supabase (veja SETUP.md) para editar os links e fotos das redes sociais.</div>
+      <div id="redes-manage" style="display:flex;flex-direction:column;gap:18px">
+        <div class="rede-social-row" data-rede="instagram" style="display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap">
+          <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;background:color-mix(in oklch, var(--verde-selo) 15%, transparent)" class="rede-avatar-preview"></div>
+          <div style="flex:1;min-width:160px">
+            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Link do Instagram</label>
+            <input type="url" class="rede-url-input" placeholder="https://instagram.com/feirareusearar"/>
+          </div>
+          <div style="flex:1;min-width:160px">
+            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Foto de perfil (opcional)</label>
+            <input type="file" class="rede-file-input" accept="image/png,image/jpeg,image/webp"/>
+          </div>
+          <button type="button" class="btn btn-primary rede-save-btn">Salvar</button>
+          <p class="form-msg rede-msg" role="status" style="width:100%;margin:0"></p>
+        </div>
+        <div class="rede-social-row" data-rede="facebook" style="display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap">
+          <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;background:color-mix(in oklch, var(--verde-selo) 15%, transparent)" class="rede-avatar-preview"></div>
+          <div style="flex:1;min-width:160px">
+            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Link do Facebook</label>
+            <input type="url" class="rede-url-input" placeholder="https://facebook.com/feirareusearar"/>
+          </div>
+          <div style="flex:1;min-width:160px">
+            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Foto de perfil (opcional)</label>
+            <input type="file" class="rede-file-input" accept="image/png,image/jpeg,image/webp"/>
+          </div>
+          <button type="button" class="btn btn-primary rede-save-btn">Salvar</button>
+          <p class="form-msg rede-msg" role="status" style="width:100%;margin:0"></p>
+        </div>
+        <div class="rede-social-row" data-rede="tiktok" style="display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap">
+          <div style="width:56px;height:56px;border-radius:50%;overflow:hidden;flex:none;background:color-mix(in oklch, var(--verde-selo) 15%, transparent)" class="rede-avatar-preview"></div>
+          <div style="flex:1;min-width:160px">
+            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Link do TikTok</label>
+            <input type="url" class="rede-url-input" placeholder="https://tiktok.com/@feirareusearar"/>
+          </div>
+          <div style="flex:1;min-width:160px">
+            <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Foto de perfil (opcional)</label>
+            <input type="file" class="rede-file-input" accept="image/png,image/jpeg,image/webp"/>
+          </div>
+          <button type="button" class="btn btn-primary rede-save-btn">Salvar</button>
+          <p class="form-msg rede-msg" role="status" style="width:100%;margin:0"></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-card">
       <h2>Inscritos em "Avise-me" (<span id="inscricoes-count">0</span>)</h2>
       <div id="inscricoes-empty" class="admin-empty" hidden>Ninguém se inscreveu ainda.</div>
       <div class="admin-table-wrap">
