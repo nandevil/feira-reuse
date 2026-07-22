@@ -88,13 +88,6 @@ details[open] .faq-chevron{transform:rotate(180deg)}
   #whatsapp-float{right:14px;bottom:14px;width:50px;height:50px}
 }
 
-/* Categorias e galeria: 3/4 colunas no desktop, 2 no tablet, 1 no celular */
-@media (max-width:1023px){
-  .cat-grid,.gallery-grid{grid-template-columns:repeat(2,1fr) !important}
-}
-@media (max-width:599px){
-  .cat-grid,.gallery-grid{grid-template-columns:1fr !important}
-}
 
 @media (max-width:900px){
   .section{padding:64px 6vw}
