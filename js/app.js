@@ -149,17 +149,14 @@ async function loadGaleria() {
   }
 
   if (!items.length) {
-    prevBtn.style.display = "none";
-    nextBtn.style.display = "none";
     dotsWrap.innerHTML = "";
     track.innerHTML = Array(4).fill(
       `<div class="carousel-slide"><div class="img-placeholder" style="width:100%;height:100%">Nenhuma foto adicionada ainda</div></div>`
     ).join("");
+    setupCarouselNav(track, dotsWrap, prevBtn, nextBtn);
     return;
   }
 
-  prevBtn.style.display = "";
-  nextBtn.style.display = "";
   track.innerHTML = items.map((it) => `
     <div class="carousel-slide">
       <img src="${it.imageUrl}" alt="${escapeHtml(it.caption || "Foto da Feira Reuse")}" loading="lazy"/>
