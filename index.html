@@ -5,11 +5,51 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Feira Reuse Araruama — Moda sustentável, comida artesanal e artesanato</title>
 <meta name="description" content="Feira Reuse Araruama: encontro mensal de economia circular com roupas sustentáveis, comida artesanal local e artesanato feito à mão.">
+
+<!-- SEO: troque SEU-DOMINIO-AQUI.com.br (aqui e em js/config.js) pelo domínio real assim que o site for publicado -->
+<link rel="canonical" href="https://SEU-DOMINIO-AQUI.com.br/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Feira Reuse Araruama — Moda sustentável, comida artesanal e artesanato">
+<meta property="og:description" content="Encontro mensal de economia circular em Araruama: roupas sustentáveis, comida artesanal local e artesanato feito à mão.">
+<meta property="og:url" content="https://SEU-DOMINIO-AQUI.com.br/">
+<meta property="og:image" content="https://SEU-DOMINIO-AQUI.com.br/img/illustration.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Feira Reuse Araruama — Moda sustentável, comida artesanal e artesanato">
+<meta name="twitter:description" content="Encontro mensal de economia circular em Araruama: roupas sustentáveis, comida artesanal local e artesanato feito à mão.">
+<meta name="twitter:image" content="https://SEU-DOMINIO-AQUI.com.br/img/illustration.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="img/logo.jpg">
 <link rel="stylesheet" href="css/style.css">
+
+<!-- Google Analytics 4 — troque G-XXXXXXXXXX (aqui e em js/config.js) pelo Measurement ID real -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+
+<!-- Meta Pixel (Facebook/Instagram Ads) — troque 0000000000000 pelo Pixel ID real -->
+<script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '0000000000000');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=0000000000000&ev=PageView&noscript=1"/></noscript>
+
+<!-- Dados estruturados (schema.org). Preenchidos/atualizados por js/app.js
+     assim que a agenda carrega do Supabase (ver renderStructuredData). -->
+<script type="application/ld+json" id="ld-event">{}</script>
+<script type="application/ld+json" id="ld-org">{}</script>
 </head>
 <body>
 
@@ -27,10 +67,7 @@
       <a href="#local">Local</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <div style="display:flex;align-items:center;gap:12px">
-      <a href="admin.html" class="btn btn-secondary" style="padding:10px 18px">Painel</a>
-      <a href="#contato" class="btn btn-primary" style="padding:10px 20px">Avise-me</a>
-    </div>
+    <a href="#contato" class="btn btn-primary" style="padding:10px 20px">Avise-me</a>
   </div>
 
   <section style="background:var(--verde-escuro);padding:80px 8vw 70px;display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden" class="hero-grid">
@@ -51,32 +88,37 @@
     </div>
   </section>
 
-  <section id="sobre" class="section">
-    <span class="kicker">O projeto</span>
-    <div class="stripe"></div>
-    <h2 class="h">O que é a Feira Reuse</h2>
-    <p style="font-size:17px;line-height:1.7;color:var(--verde-escuro);max-width:680px;margin:0 0 40px">
-      A Feira Reuse Araruama é um encontro mensal que reúne feirantes locais em torno de um mesmo propósito: dar nova vida a roupas, alimentos e materiais, fortalecendo a economia circular e a comunidade da região.
-    </p>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:32px" class="cat-grid">
-      <a href="#" style="display:flex;flex-direction:column;align-items:flex-start;gap:14px">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="var(--creme)" stroke="none"/></svg>
-        </div>
-        <h3 style="font-weight:400;font-size:20px;margin:0;color:var(--verde-escuro)">Instagram</h3>
-      </a>
-      <a href="#" style="display:flex;flex-direction:column;align-items:flex-start;gap:14px">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-2a4 4 0 00-4 4v3H7v4h2v7h4v-7h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-        </div>
-        <h3 style="font-weight:400;font-size:20px;margin:0;color:var(--verde-escuro)">Facebook</h3>
-      </a>
-      <a href="#" style="display:flex;flex-direction:column;align-items:flex-start;gap:14px">
-        <div style="width:56px;height:56px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3c.5 2.2 2 3.7 4 4v3c-1.5 0-2.9-.4-4-1.2V15a5.5 5.5 0 11-5.5-5.5c.3 0 .7 0 1 .1v3.1a2.4 2.4 0 102 2.4V3h2.5z"/></svg>
-        </div>
-        <h3 style="font-weight:400;font-size:20px;margin:0;color:var(--verde-escuro)">TikTok</h3>
-      </a>
+  <section id="sobre" class="section sobre-grid" style="display:grid;grid-template-columns:1.1fr 0.9fr;gap:56px;align-items:center">
+    <div>
+      <span class="kicker">O projeto</span>
+      <div class="stripe"></div>
+      <h2 class="h">O que é a Feira Reuse</h2>
+      <p style="font-size:17px;line-height:1.7;color:var(--verde-escuro);max-width:520px;margin:0 0 40px">
+        A Feira Reuse Araruama é um encontro mensal que reúne feirantes locais em torno de um mesmo propósito: dar nova vida a roupas, alimentos e materiais, fortalecendo a economia circular e a comunidade da região. Siga a feira nas redes:
+      </p>
+      <div class="social-row">
+        <a href="#" data-social="instagram" style="display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="var(--creme)" stroke="none"/></svg>
+          </div>
+          <h3 style="font-weight:400;font-size:18px;margin:0;color:var(--verde-escuro)">Instagram</h3>
+        </a>
+        <a href="#" data-social="facebook" style="display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-2a4 4 0 00-4 4v3H7v4h2v7h4v-7h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+          </div>
+          <h3 style="font-weight:400;font-size:18px;margin:0;color:var(--verde-escuro)">Facebook</h3>
+        </a>
+        <a href="#" data-social="tiktok" style="display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--verde-selo);display:flex;align-items:center;justify-content:center;flex:none">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--creme)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3c.5 2.2 2 3.7 4 4v3c-1.5 0-2.9-.4-4-1.2V15a5.5 5.5 0 11-5.5-5.5c.3 0 .7 0 1 .1v3.1a2.4 2.4 0 102 2.4V3h2.5z"/></svg>
+          </div>
+          <h3 style="font-weight:400;font-size:18px;margin:0;color:var(--verde-escuro)">TikTok</h3>
+        </a>
+      </div>
+    </div>
+    <div class="sobre-illustration">
+      <img src="img/illustration.jpg" alt="Ilustração da Feira Reuse com barracas de roupas, comida e artesanato" loading="lazy" width="600" height="588" style="width:100%;height:auto;display:block;border-radius:16px"/>
     </div>
   </section>
 
@@ -86,7 +128,8 @@
     <h2 class="h" style="color:var(--creme)">Categorias da feira</h2>
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:20px" class="cat-grid">
       <div class="card" style="background:var(--creme)">
-        <div style="height:180px" class="img-placeholder">Foto de roupas sustentáveis</div>
+        <!-- TODO: substituir por foto real (roupas sustentáveis / upcycled) -->
+        <img src="img/categorias/roupas.jpg" alt="Roupas sustentáveis e upcycled à venda na Feira Reuse" loading="lazy" width="400" height="180" style="width:100%;height:180px;object-fit:cover;display:block"/>
         <div style="padding:22px">
           <span class="plank">Vestuário</span>
           <h3 style="font-weight:400;font-size:19px;margin:14px 0 6px;color:var(--verde-escuro)">Roupas sustentáveis &amp; upcycled</h3>
@@ -94,7 +137,8 @@
         </div>
       </div>
       <div class="card" style="background:var(--creme)">
-        <div style="height:180px" class="img-placeholder">Foto de comida artesanal</div>
+        <!-- TODO: substituir por foto real (comida artesanal) -->
+        <img src="img/categorias/comida.jpg" alt="Comida artesanal local vendida na Feira Reuse" loading="lazy" width="400" height="180" style="width:100%;height:180px;object-fit:cover;display:block"/>
         <div style="padding:22px">
           <span class="plank">Alimentação</span>
           <h3 style="font-weight:400;font-size:19px;margin:14px 0 6px;color:var(--verde-escuro)">Comida artesanal local</h3>
@@ -102,7 +146,8 @@
         </div>
       </div>
       <div class="card" style="background:var(--creme)">
-        <div style="height:180px" class="img-placeholder">Foto de joias e artesanato</div>
+        <!-- TODO: substituir por foto real (joias e artesanato) -->
+        <img src="img/categorias/artesanato.jpg" alt="Joias e artesanato feito à mão na Feira Reuse" loading="lazy" width="400" height="180" style="width:100%;height:180px;object-fit:cover;display:block"/>
         <div style="padding:22px">
           <span class="plank">Artesanato</span>
           <h3 style="font-weight:400;font-size:19px;margin:14px 0 6px;color:var(--verde-escuro)">Joias &amp; artesanato feito à mão</h3>
@@ -155,7 +200,7 @@
           </div>
           <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:6px">
             <button type="submit" class="btn btn-primary">Enviar questionário</button>
-            <a href="#" class="btn btn-secondary" style="border-color:var(--creme);color:var(--creme)">Falar no WhatsApp</a>
+            <a href="#" data-whatsapp-link target="_blank" rel="noopener" class="btn btn-secondary" style="border-color:var(--creme);color:var(--creme)">Falar no WhatsApp</a>
           </div>
           <p id="feirante-msg" class="form-msg" role="status"></p>
         </form>
@@ -186,7 +231,12 @@
       <p id="local-data-hora" style="font-size:16px;line-height:1.6;color:var(--verde-escuro);max-width:460px;margin:0 0 28px"><strong>Data e horário:</strong> a definir</p>
       <a href="#" id="ver-mapa-link" class="btn btn-secondary">Ver no mapa</a>
     </div>
-    <div class="img-placeholder" style="width:100%;height:320px;border-radius:16px">Mapa do local da feira</div>
+    <div id="mapa-container" style="width:100%;height:320px;border-radius:16px;overflow:hidden">
+      <div id="mapa-fallback" class="map-fallback">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11.8A8 8 0 004 10.2C4 17.5 12 22 12 22z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>O mapa aparece assim que o local for confirmado</span>
+      </div>
+    </div>
   </section>
 
   <section id="galeria" class="section" style="background:var(--verde-escuro)">
@@ -194,10 +244,14 @@
     <div class="stripe" style="border-color:var(--creme)"></div>
     <h2 class="h" style="color:var(--creme)">Galeria</h2>
     <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:20px" class="gallery-grid">
-      <div class="img-placeholder" style="width:100%;height:200px;border-radius:12px">Foto da feira</div>
-      <div class="img-placeholder" style="width:100%;height:200px;border-radius:12px">Foto da feira</div>
-      <div class="img-placeholder" style="width:100%;height:200px;border-radius:12px">Foto da feira</div>
-      <div class="img-placeholder" style="width:100%;height:200px;border-radius:12px">Foto da feira</div>
+      <!-- TODO: substituir por foto real da feira -->
+      <img src="img/galeria/1.jpg" alt="Foto de uma edição anterior da Feira Reuse" loading="lazy" width="260" height="200" style="width:100%;height:200px;object-fit:cover;border-radius:12px;display:block"/>
+      <!-- TODO: substituir por foto real da feira -->
+      <img src="img/galeria/2.jpg" alt="Foto de uma edição anterior da Feira Reuse" loading="lazy" width="260" height="200" style="width:100%;height:200px;object-fit:cover;border-radius:12px;display:block"/>
+      <!-- TODO: substituir por foto real da feira -->
+      <img src="img/galeria/3.jpg" alt="Foto de uma edição anterior da Feira Reuse" loading="lazy" width="260" height="200" style="width:100%;height:200px;object-fit:cover;border-radius:12px;display:block"/>
+      <!-- TODO: substituir por foto real da feira -->
+      <img src="img/galeria/4.jpg" alt="Foto de uma edição anterior da Feira Reuse" loading="lazy" width="260" height="200" style="width:100%;height:200px;object-fit:cover;border-radius:12px;display:block"/>
     </div>
   </section>
 
@@ -208,17 +262,11 @@
     <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:40px;margin-top:12px" class="feedback-grid">
       <div>
         <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Feirantes</h3>
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div class="quote-card"><p class="stars">★★★★★</p><p style="margin:8px 0 0;line-height:1.6">"A feira me deu visibilidade e novos clientes fiéis em Araruama."</p><p style="margin:12px 0 0;font-weight:600;opacity:.8">— Feirante de artesanato</p></div>
-          <div class="quote-card"><p class="stars">★★★★★</p><p style="margin:8px 0 0;line-height:1.6">"Organização impecável e um público que valoriza produto sustentável."</p><p style="margin:12px 0 0;font-weight:600;opacity:.8">— Feirante de roupas upcycled</p></div>
-        </div>
+        <div id="depoimentos-feirantes" style="display:flex;flex-direction:column;gap:16px"></div>
       </div>
       <div>
         <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Visitantes</h3>
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div class="quote-card"><p class="stars">★★★★★</p><p style="margin:8px 0 0;line-height:1.6">"Achei peças incríveis e ainda ajudei o comércio local."</p><p style="margin:12px 0 0;font-weight:600;opacity:.8">— Visitante</p></div>
-          <div class="quote-card"><p class="stars">★★★★★</p><p style="margin:8px 0 0;line-height:1.6">"Feira com propósito de verdade — já virou programa mensal aqui em casa."</p><p style="margin:12px 0 0;font-weight:600;opacity:.8">— Visitante</p></div>
-        </div>
+        <div id="depoimentos-visitantes" style="display:flex;flex-direction:column;gap:16px"></div>
       </div>
     </div>
   </section>
@@ -269,18 +317,25 @@
         <span class="display" style="font-size:19px">Feira Reuse</span>
       </div>
       <div style="display:flex;gap:22px;flex-wrap:wrap">
-        <a href="#" style="color:var(--creme);opacity:.85">Instagram</a>
-        <a href="#" style="color:var(--creme);opacity:.85">WhatsApp</a>
-        <a href="#" style="color:var(--creme);opacity:.85">E-mail</a>
+        <a href="#" data-social="instagram" style="color:var(--creme);opacity:.85">Instagram</a>
+        <a href="#" data-whatsapp-link target="_blank" rel="noopener" style="color:var(--creme);opacity:.85">WhatsApp</a>
+        <a href="#" data-email-link style="color:var(--creme);opacity:.85">E-mail</a>
       </div>
     </div>
-    <p style="opacity:.6;font-size:13px;margin:24px 0 0">© 2026 Feira Reuse Araruama. Todos os direitos reservados.</p>
+    <p style="opacity:.75;font-size:13px;margin:24px 0 0">© 2026 Feira Reuse Araruama. Todos os direitos reservados. · <a href="privacidade.html" style="color:var(--creme);text-decoration:underline">Privacidade</a></p>
   </footer>
 
 </div>
 
+<a href="#" data-whatsapp-link target="_blank" rel="noopener" id="whatsapp-float" aria-label="Falar no WhatsApp" title="Falar no WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--creme)"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5.1-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.7.8-.8.9-.1.2-.3.2-.5.1-.2-.1-1-.4-2-1.2-.7-.7-1.2-1.5-1.4-1.7-.1-.2 0-.4.1-.5.1-.1.2-.3.4-.4.1-.1.2-.2.2-.4.1-.1 0-.3 0-.4-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.4c.1.2 1.6 2.5 4 3.4.6.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2-.1-.1-.2-.2-.4-.3z"/></svg>
+</a>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
 <script src="js/supabase-client.js"></script>
+<script src="js/depoimentos.js"></script>
+<script src="js/analytics-events.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>
