@@ -143,6 +143,21 @@
     </div>
   </section>
 
+  <section id="contato" class="section" style="background:var(--verde-selo);display:flex;justify-content:center">
+    <div style="max-width:560px;width:100%;text-align:center">
+      <span class="kicker" style="color:var(--creme)">Fique por dentro</span>
+      <div class="stripe" style="border-color:var(--creme);margin:6px auto 0"></div>
+      <h2 class="h" style="color:var(--creme)">Avise-me da próxima feira</h2>
+      <p style="font-size:16px;line-height:1.6;color:color-mix(in oklch, var(--creme) 88%, transparent);margin:0 0 24px">Deixe seu e-mail e WhatsApp para receber a data da próxima edição em primeira mão.</p>
+      <form id="form-avise-me" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left" class="contact-form">
+        <div class="field"><label style="color:var(--creme);font-size:13px;font-weight:600">E-mail</label><input type="email" name="email" placeholder="seu@email.com" required/></div>
+        <div class="field"><label style="color:var(--creme);font-size:13px;font-weight:600">WhatsApp</label><input type="tel" name="whatsapp" placeholder="(22) 90000-0000" required/></div>
+        <button type="submit" class="btn" style="grid-column:1/-1;background:var(--creme);color:var(--verde-selo);border:none">Quero ser avisado</button>
+        <p id="avise-me-msg" class="form-msg" role="status" style="grid-column:1/-1"></p>
+      </form>
+    </div>
+  </section>
+
   <section id="categorias" class="section" style="background:var(--verde-escuro)">
     <span class="kicker" style="color:var(--creme)">O que você encontra</span>
     <div class="stripe" style="border-color:var(--creme)"></div>
@@ -327,21 +342,6 @@
         <h3 style="font-weight:400;font-size:16px;letter-spacing:.08em;text-transform:uppercase;color:var(--verde-selo);margin:0 0 16px">Visitantes</h3>
         <div id="depoimentos-visitantes" style="display:flex;flex-direction:column;gap:16px"></div>
       </div>
-    </div>
-  </section>
-
-  <section id="contato" class="section" style="background:var(--verde-selo);display:flex;justify-content:center">
-    <div style="max-width:560px;width:100%;text-align:center">
-      <span class="kicker" style="color:var(--creme)">Fique por dentro</span>
-      <div class="stripe" style="border-color:var(--creme);margin:6px auto 0"></div>
-      <h2 class="h" style="color:var(--creme)">Avise-me da próxima feira</h2>
-      <p style="font-size:16px;line-height:1.6;color:color-mix(in oklch, var(--creme) 88%, transparent);margin:0 0 24px">Deixe seu e-mail e WhatsApp para receber a data da próxima edição em primeira mão.</p>
-      <form id="form-avise-me" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left" class="contact-form">
-        <div class="field"><label style="color:var(--creme);font-size:13px;font-weight:600">E-mail</label><input type="email" name="email" placeholder="seu@email.com" required/></div>
-        <div class="field"><label style="color:var(--creme);font-size:13px;font-weight:600">WhatsApp</label><input type="tel" name="whatsapp" placeholder="(22) 90000-0000" required/></div>
-        <button type="submit" class="btn" style="grid-column:1/-1;background:var(--creme);color:var(--verde-selo);border:none">Quero ser avisado</button>
-        <p id="avise-me-msg" class="form-msg" role="status" style="grid-column:1/-1"></p>
-      </form>
     </div>
   </section>
 
