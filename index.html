@@ -84,7 +84,6 @@
     </div>
     <div style="position:relative;z-index:1;display:flex;align-items:center;justify-content:center">
       <img src="img/illustration.jpg" alt="Ilustração da Feira Reuse com barracas de roupas, comida e artesanato" style="width:100%;height:auto;display:block;border-radius:16px"/>
-      <img src="img/logo.jpg" alt="Selo Feira Reuse" class="stamp-spin" style="position:absolute;bottom:-24px;left:-24px;width:96px;height:96px;border-radius:50%;box-shadow:0 8px 24px rgba(0,0,0,.35)"/>
     </div>
   </section>
 
@@ -246,9 +245,12 @@
     <div class="carousel" id="galeria-carousel" style="margin-top:20px">
       <div class="carousel-track" id="galeria-track">
         <div class="carousel-slide"><div class="img-placeholder" style="width:100%;height:100%">Nenhuma foto adicionada ainda</div></div>
+        <div class="carousel-slide"><div class="img-placeholder" style="width:100%;height:100%">Nenhuma foto adicionada ainda</div></div>
+        <div class="carousel-slide"><div class="img-placeholder" style="width:100%;height:100%">Nenhuma foto adicionada ainda</div></div>
+        <div class="carousel-slide"><div class="img-placeholder" style="width:100%;height:100%">Nenhuma foto adicionada ainda</div></div>
       </div>
-      <button type="button" class="carousel-btn carousel-prev" id="galeria-prev" aria-label="Foto anterior">‹</button>
-      <button type="button" class="carousel-btn carousel-next" id="galeria-next" aria-label="Próxima foto">›</button>
+      <button type="button" class="carousel-btn carousel-prev" id="galeria-prev" aria-label="Foto anterior" style="display:none">‹</button>
+      <button type="button" class="carousel-btn carousel-next" id="galeria-next" aria-label="Próxima foto" style="display:none">›</button>
       <div class="carousel-dots" id="galeria-dots"></div>
     </div>
   </section>
@@ -269,13 +271,13 @@
     </div>
   </section>
 
-  <section id="contato" class="section" style="background:var(--verde-selo)">
-    <div style="max-width:560px">
+  <section id="contato" class="section" style="background:var(--verde-selo);display:flex;justify-content:center">
+    <div style="max-width:560px;width:100%;text-align:center">
       <span class="kicker" style="color:var(--creme)">Fique por dentro</span>
-      <div class="stripe" style="border-color:var(--creme)"></div>
+      <div class="stripe" style="border-color:var(--creme);margin:6px auto 0"></div>
       <h2 class="h" style="color:var(--creme)">Avise-me da próxima feira</h2>
       <p style="font-size:16px;line-height:1.6;color:color-mix(in oklch, var(--creme) 88%, transparent);margin:0 0 24px">Deixe seu e-mail e WhatsApp para receber a data da próxima edição em primeira mão.</p>
-      <form id="form-avise-me" style="display:grid;grid-template-columns:1fr 1fr;gap:16px" class="contact-form">
+      <form id="form-avise-me" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left" class="contact-form">
         <div class="field"><label style="color:var(--creme);font-size:13px;font-weight:600">E-mail</label><input type="email" name="email" placeholder="seu@email.com" required/></div>
         <div class="field"><label style="color:var(--creme);font-size:13px;font-weight:600">WhatsApp</label><input type="tel" name="whatsapp" placeholder="(22) 90000-0000" required/></div>
         <button type="submit" class="btn" style="grid-column:1/-1;background:var(--creme);color:var(--verde-selo);border:none">Quero ser avisado</button>

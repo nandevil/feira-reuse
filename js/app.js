@@ -174,7 +174,10 @@ async function loadGaleria() {
     prevBtn.style.display = "none";
     nextBtn.style.display = "none";
     dotsWrap.innerHTML = "";
-    return; // mantém o slide de placeholder que já está no HTML
+    track.innerHTML = Array(4).fill(
+      `<div class="carousel-slide"><div class="img-placeholder" style="width:100%;height:100%">Nenhuma foto adicionada ainda</div></div>`
+    ).join("");
+    return;
   }
 
   prevBtn.style.display = "";
@@ -191,17 +194,18 @@ async function loadGaleria() {
   setupCarouselNav(track, dotsWrap, prevBtn, nextBtn);
 }
 
+/* Carrossel com vários quadrados visíveis ao mesmo tempo (a quantidade
+   varia por CSS/breakpoint) — prev/next avançam um item por vez,
+   alinhando-o à borda esquerda da faixa (efeito "esteira"). */
 function setupCarouselNav(track, dotsWrap, prevBtn, nextBtn) {
   const slides = [...track.children];
   const dots = [...dotsWrap.children];
 
-  function currentIndex() {
+  function leftmostIndex() {
     const trackRect = track.getBoundingClientRect();
-    const center = trackRect.left + trackRect.width / 2;
     let closest = 0, closestDist = Infinity;
     slides.forEach((s, i) => {
-      const r = s.getBoundingClientRect();
-      const dist = Math.abs(r.left + r.width / 2 - center);
+      const dist = Math.abs(s.getBoundingClientRect().left - trackRect.left);
       if (dist < closestDist) { closestDist = dist; closest = i; }
     });
     return closest;
@@ -209,18 +213,18 @@ function setupCarouselNav(track, dotsWrap, prevBtn, nextBtn) {
 
   function goTo(i) {
     const idx = Math.max(0, Math.min(slides.length - 1, i));
-    slides[idx].scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    slides[idx].scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" });
   }
 
-  prevBtn.onclick = () => goTo(currentIndex() - 1);
-  nextBtn.onclick = () => goTo(currentIndex() + 1);
+  prevBtn.onclick = () => goTo(leftmostIndex() - 1);
+  nextBtn.onclick = () => goTo(leftmostIndex() + 1);
   dots.forEach((d, i) => { d.onclick = () => goTo(i); });
 
   let scrollTimeout;
   track.addEventListener("scroll", () => {
     clearTimeout(scrollTimeout);
     scrollTimeout = setTimeout(() => {
-      const idx = currentIndex();
+      const idx = leftmostIndex();
       dots.forEach((d, i) => d.classList.toggle("active", i === idx));
     }, 100);
   });
