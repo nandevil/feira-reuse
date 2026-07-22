@@ -30,11 +30,14 @@ const FEIRA_CONFIG = {
 };
 
 /* Monta o link wa.me a partir do número acima; retorna "#" (inerte)
-   se o número ainda não foi preenchido, para não gerar um link quebrado. */
-function whatsappLink() {
+   se o número ainda não foi preenchido, para não gerar um link quebrado.
+   Aceita uma mensagem específica (customMessage); sem ela, usa a
+   mensagem padrão de FEIRA_CONFIG.whatsappMessage. */
+function whatsappLink(customMessage) {
   const n = (FEIRA_CONFIG.whatsappNumber || "").replace(/\D/g, "");
   if (!n) return "#";
-  return "https://wa.me/" + n + "?text=" + encodeURIComponent(FEIRA_CONFIG.whatsappMessage || "");
+  const msg = customMessage || FEIRA_CONFIG.whatsappMessage || "";
+  return "https://wa.me/" + n + "?text=" + encodeURIComponent(msg);
 }
 
 /* Aplica os links de config.js em todo elemento marcado com
@@ -47,8 +50,10 @@ function applyFeiraConfigLinks() {
     if (url && url !== "#") el.href = url;
   });
 
-  const wa = whatsappLink();
+  // data-whatsapp-message (opcional): mensagem própria desse botão,
+  // em vez da mensagem padrão — ex: o CTA "Seja um Parceiro".
   document.querySelectorAll("[data-whatsapp-link]").forEach((el) => {
+    const wa = whatsappLink(el.getAttribute("data-whatsapp-message"));
     if (wa !== "#") el.href = wa;
   });
 
