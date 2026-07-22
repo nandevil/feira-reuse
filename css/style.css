@@ -99,7 +99,7 @@ details[open] .faq-chevron{transform:rotate(180deg)}
 @media (max-width:900px){
   .section{padding:64px 6vw}
   .hero-grid,.sobre-grid{grid-template-columns:1fr !important}
-  .feirantes-grid, .feedback-grid{grid-template-columns:1fr !important}
+  .feirantes-grid, .feedback-grid, .parcerias-grid{grid-template-columns:1fr !important}
   .contact-form{grid-template-columns:1fr !important}
   .nav-links{display:none}
   .admin-form-row{grid-template-columns:1fr !important}
