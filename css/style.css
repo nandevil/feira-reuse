@@ -12,9 +12,9 @@ h1,h2,h3,.display{font-family:'Anton',sans-serif;text-transform:uppercase;letter
 a{color:var(--verde-selo);text-decoration:none}
 a:hover{color:var(--verde-escuro)}
 img{max-width:100%}
-.section{padding:88px 8vw;scroll-margin-top:80px}
+.section{padding:88px 8vw;scroll-margin-top:80px;text-align:center}
 .kicker{font-family:'Poppins',sans-serif;font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:13px;color:var(--verde-selo)}
-.stripe{width:64px;height:0;border-top:3px solid var(--verde-selo);border-bottom:0;margin-top:6px;position:relative}
+.stripe{width:64px;height:0;border-top:3px solid var(--verde-selo);border-bottom:0;margin:6px auto 0;position:relative}
 .stripe::after{content:"";position:absolute;top:6px;left:0;width:64px;height:0;border-top:3px solid var(--verde-selo)}
 h2.h{font-weight:400;font-size:clamp(30px,3.6vw,44px);margin:22px 0 20px;line-height:1.06}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:14px 28px;font-family:'Poppins',sans-serif;font-weight:600;font-size:15px;border:2px solid transparent;cursor:pointer;transition:background .15s ease}
@@ -28,13 +28,14 @@ h2.h{font-weight:400;font-size:clamp(30px,3.6vw,44px);margin:22px 0 20px;line-he
 .field{display:flex;flex-direction:column;gap:6px}
 .field input{border:2px solid color-mix(in oklch, var(--verde-selo) 35%, transparent);background:var(--creme-tint);border-radius:10px;padding:12px 14px;font-family:'Poppins',sans-serif;font-size:15px;color:var(--verde-escuro)}
 .field input:focus-visible{outline:2px solid var(--verde-selo);outline-offset:2px}
+.faq-list{text-align:left}
 .faq-item summary{cursor:pointer;font-family:'Anton',sans-serif;font-size:18px;padding:20px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--verde-escuro);gap:16px}
 .faq-item summary::-webkit-details-marker{display:none}
 .faq-item{border-bottom:2px solid color-mix(in oklch, var(--verde-selo) 25%, transparent)}
 .faq-item p{margin:0 0 22px;color:color-mix(in oklch, var(--verde-escuro) 80%, transparent);max-width:640px;line-height:1.6}
 .faq-chevron{transition:transform .2s ease;flex:none}
 details[open] .faq-chevron{transform:rotate(180deg)}
-.quote-card{background:var(--verde-escuro);color:var(--creme);border-radius:16px;padding:28px}
+.quote-card{background:var(--verde-escuro);color:var(--creme);border-radius:16px;padding:28px;text-align:left}
 .quote-card .stars{color:var(--creme);opacity:.85;letter-spacing:2px}
 .map-fallback{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:color-mix(in oklch, var(--verde-selo) 12%, var(--creme-tint));color:color-mix(in oklch, var(--verde-escuro) 78%, transparent);font-size:13px;text-align:center;padding:12px}
 .img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:color-mix(in oklch, var(--verde-selo) 12%, var(--creme-tint));color:color-mix(in oklch, var(--verde-escuro) 78%, transparent);font-size:13px;text-align:center;padding:12px}
@@ -66,7 +67,8 @@ details[open] .faq-chevron{transform:rotate(180deg)}
   .carousel-next{right:8px}
 }
 
-.social-row{display:flex;gap:16px;flex-wrap:wrap}
+.btn-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.social-row{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .social-pill{display:inline-flex;align-items:center;gap:12px;background:var(--verde-selo);border-radius:999px;padding:6px 26px 6px 6px;transition:background .15s ease}
 .social-pill:hover{background:var(--verde-selo-600)}
 .social-pill-avatar{width:44px;height:44px;border-radius:50%;background:color-mix(in oklch, var(--creme) 18%, transparent);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}

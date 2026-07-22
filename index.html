@@ -70,14 +70,14 @@
     <a href="#contato" class="btn btn-primary" style="padding:10px 20px">Avise-me</a>
   </div>
 
-  <section style="background:var(--verde-escuro);padding:80px 8vw 70px;display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden" class="hero-grid">
+  <section style="background:var(--verde-escuro);padding:80px 8vw 70px;display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center;position:relative;overflow:hidden;text-align:center" class="hero-grid">
     <div style="position:relative;z-index:1">
       <span class="plank">Araruama · Feira comunitária</span>
       <h1 style="color:var(--creme);font-weight:400;font-size:clamp(38px,5vw,60px);line-height:1.03;margin:22px 0 18px">Reusar é a nossa forma de cuidar de Araruama</h1>
-      <p style="font-family:'Poppins',sans-serif;font-size:18px;line-height:1.65;color:color-mix(in oklch, var(--creme) 85%, transparent);max-width:520px;margin:0 0 28px">
+      <p style="font-family:'Poppins',sans-serif;font-size:18px;line-height:1.65;color:color-mix(in oklch, var(--creme) 85%, transparent);max-width:520px;margin:0 auto 28px">
         Roupas sustentáveis, comida artesanal local e artesanato feito à mão — um encontro de reuso e economia circular, todo mês em Araruama.
       </p>
-      <div style="display:flex;gap:16px;flex-wrap:wrap">
+      <div class="btn-row">
         <a href="#contato" class="btn btn-primary">Quero visitar</a>
         <a href="#feirantes" class="btn btn-secondary" style="border-color:var(--creme);color:var(--creme)">Quero ser feirante</a>
       </div>
@@ -92,8 +92,8 @@
       <span class="kicker">O projeto</span>
       <div class="stripe"></div>
       <h2 class="h">O que é a Feira Reuse</h2>
-      <p style="font-size:17px;line-height:1.7;color:var(--verde-escuro);max-width:520px;margin:0 0 40px">
-        A Feira Reuse Araruama é um encontro mensal que reúne feirantes locais em torno de um mesmo propósito: dar nova vida a roupas, alimentos e materiais, fortalecendo a economia circular e a comunidade da região. Siga a feira nas redes:
+      <p style="font-size:17px;line-height:1.7;color:var(--verde-escuro);max-width:520px;margin:0 auto 40px">
+        A Feira Reuse Araruama é um encontro mensal que reúne feirantes locais em torno de um mesmo propósito: dar nova vida a roupas e dar visibilidade aos talentos do artesanato e da gastronomia de Araruama, fortalecendo a economia circular e a comunidade da região. Siga a feira nas redes sociais!
       </p>
       <div class="social-row">
         <a href="#" data-social="instagram" class="social-pill">
@@ -160,8 +160,8 @@
     <span class="kicker">Agenda</span>
     <div class="stripe"></div>
     <h2 class="h">Próximas feiras</h2>
-    <p style="font-size:16px;color:color-mix(in oklch, var(--verde-escuro) 80%, transparent);max-width:600px;margin:0 0 32px">Atualizada mensalmente pela organização. Confira a próxima data ou cadastre-se para ser avisado.</p>
-    <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px 32px;flex-wrap:wrap">
+    <p style="font-size:16px;color:color-mix(in oklch, var(--verde-escuro) 80%, transparent);max-width:600px;margin:0 auto 32px">Atualizada mensalmente pela organização. Confira a próxima data ou cadastre-se para ser avisado.</p>
+    <div class="card" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px 32px;flex-wrap:wrap;text-align:left">
       <div style="display:flex;align-items:center;gap:20px">
         <div style="background:var(--verde-selo);color:var(--creme);border-radius:12px;padding:14px 20px;text-align:center;min-width:84px">
           <div class="display" id="agenda-label" style="font-size:26px;line-height:1">A definir</div>
@@ -181,10 +181,10 @@
     <h2 class="h" style="color:var(--creme)">Quer expor na Feira Reuse?</h2>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:8px" class="feirantes-grid">
       <div>
-        <p style="font-size:16px;line-height:1.7;color:color-mix(in oklch, var(--creme) 85%, transparent);max-width:480px;margin:0 0 26px">
+        <p style="font-size:16px;line-height:1.7;color:color-mix(in oklch, var(--creme) 85%, transparent);max-width:480px;margin:0 auto 26px">
           Preencha o questionário de participação — suas respostas chegam direto para a organização, que confirma sua vaga e envia os detalhes da próxima edição pelo WhatsApp.
         </p>
-        <form id="form-feirante" style="display:flex;flex-direction:column;gap:14px;max-width:420px">
+        <form id="form-feirante" style="display:flex;flex-direction:column;gap:14px;max-width:420px;margin:0 auto;text-align:left">
           <div class="field">
             <label style="color:var(--creme);font-size:13px;font-weight:600">Nome</label>
             <input type="text" name="nome" placeholder="Seu nome" required/>
@@ -197,14 +197,14 @@
             <label style="color:var(--creme);font-size:13px;font-weight:600">O que você vende?</label>
             <input type="text" name="produtos" placeholder="Ex: roupas upcycled, joias, comida artesanal..." required/>
           </div>
-          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:6px">
+          <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin-top:6px">
             <button type="submit" class="btn btn-primary">Enviar questionário</button>
             <a href="#" data-whatsapp-link target="_blank" rel="noopener" class="btn btn-secondary" style="border-color:var(--creme);color:var(--creme)">Falar no WhatsApp</a>
           </div>
           <p id="feirante-msg" class="form-msg" role="status"></p>
         </form>
       </div>
-      <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;flex-direction:column;gap:20px;text-align:left">
         <div style="display:flex;gap:16px;align-items:flex-start">
           <div style="width:34px;height:34px;border-radius:50%;background:var(--creme);color:var(--verde-escuro);display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;flex:none">1</div>
           <div><strong style="font-weight:400;font-size:17px;color:var(--creme);font-family:'Anton',sans-serif">Responda o questionário</strong><p style="margin:6px 0 0;color:color-mix(in oklch, var(--creme) 78%, transparent)">Conte o que você vende e como se encaixa no reuso.</p></div>
@@ -226,8 +226,8 @@
       <span class="kicker">Onde acontece</span>
       <div class="stripe"></div>
       <h2 class="h">Local e horário</h2>
-      <p id="local-endereco" style="font-size:16px;line-height:1.6;color:var(--verde-escuro);max-width:460px;margin:0 0 10px"><strong>Endereço:</strong> a definir</p>
-      <p id="local-data-hora" style="font-size:16px;line-height:1.6;color:var(--verde-escuro);max-width:460px;margin:0 0 28px"><strong>Data e horário:</strong> a definir</p>
+      <p id="local-endereco" style="font-size:16px;line-height:1.6;color:var(--verde-escuro);max-width:460px;margin:0 auto 10px"><strong>Endereço:</strong> a definir</p>
+      <p id="local-data-hora" style="font-size:16px;line-height:1.6;color:var(--verde-escuro);max-width:460px;margin:0 auto 28px"><strong>Data e horário:</strong> a definir</p>
       <a href="#" id="ver-mapa-link" class="btn btn-secondary">Ver no mapa</a>
     </div>
     <div id="mapa-container" style="width:100%;height:320px;border-radius:16px;overflow:hidden">
@@ -286,11 +286,11 @@
     </div>
   </section>
 
-  <section id="faq" class="section" style="max-width:820px">
+  <section id="faq" class="section" style="max-width:820px;margin:0 auto">
     <span class="kicker">Dúvidas</span>
     <div class="stripe"></div>
     <h2 class="h">Perguntas frequentes</h2>
-    <div style="margin-top:10px">
+    <div class="faq-list" style="margin-top:10px">
       <details class="faq-item" open>
         <summary>A entrada é gratuita?<svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--verde-selo)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
         <p>Sim, a entrada é gratuita e aberta a toda a comunidade.</p>
