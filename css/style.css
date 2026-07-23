@@ -29,10 +29,10 @@ h2.h{font-weight:400;font-size:clamp(30px,3.6vw,44px);margin:22px 0 20px;line-he
 .field input{border:2px solid color-mix(in oklch, var(--verde-selo) 35%, transparent);background:var(--creme-tint);border-radius:10px;padding:12px 14px;font-family:'Poppins',sans-serif;font-size:15px;color:var(--verde-escuro)}
 .field input:focus-visible{outline:2px solid var(--verde-selo);outline-offset:2px}
 .faq-list{text-align:left}
-.faq-item summary{cursor:pointer;font-family:'Anton',sans-serif;font-size:18px;padding:20px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--verde-escuro);gap:16px}
+.faq-item summary{cursor:pointer;font-family:'Anton',sans-serif;font-size:18px;padding:20px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;color:var(--creme);gap:16px}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item{border-bottom:2px solid color-mix(in oklch, var(--verde-selo) 25%, transparent)}
-.faq-item p{margin:0 0 22px;color:color-mix(in oklch, var(--verde-escuro) 80%, transparent);max-width:640px;line-height:1.6}
+.faq-item{border-bottom:2px solid color-mix(in oklch, var(--creme) 25%, transparent)}
+.faq-item p{margin:0 0 22px;color:color-mix(in oklch, var(--creme) 85%, transparent);max-width:640px;line-height:1.6}
 .faq-chevron{transition:transform .2s ease;flex:none}
 details[open] .faq-chevron{transform:rotate(180deg)}
 .quote-card{background:var(--verde-escuro);color:var(--creme);border-radius:16px;padding:28px;text-align:left}
@@ -134,12 +134,16 @@ details[open] .faq-chevron{transform:rotate(180deg)}
   .quote-card, .faq-item p{
     text-align:center !important;
   }
-  .step-row, .quote-author, .info-card{
+  .quote-author, .info-card{
     flex-direction:column;
     align-items:center;
     text-align:center;
   }
-  .step-row > div:last-child{text-align:center}
+  /* Os passos numerados ("Seja feirante") mantêm número + texto lado a
+     lado (mais legível que empilhado) — só centraliza a linha inteira
+     dentro da coluna. */
+  .step-row{justify-content:center}
+  .step-row > div:last-child{text-align:left}
   .tags-row{justify-content:center}
 }
 
