@@ -14,6 +14,15 @@ function fmtDate(iso) {
   return d.toLocaleDateString("pt-BR") + " " + d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 }
 
+/* Monta o link wa.me a partir do número salvo no cadastro (aceita com
+   ou sem "55" na frente, com ou sem parênteses/traço). */
+function waLinkFromPhone(phone) {
+  let digits = String(phone || "").replace(/\D/g, "");
+  if (!digits) return "";
+  if (!digits.startsWith("55")) digits = "55" + digits;
+  return "https://wa.me/" + digits;
+}
+
 function readLocalList(key) {
   try { return JSON.parse(localStorage.getItem(key)) || []; }
   catch { return []; }
@@ -168,7 +177,8 @@ async function loadFeirantes() {
   document.getElementById("feirantes-table").hidden = rows.length === 0;
   for (const r of rows) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td>`;
+    const wa = waLinkFromPhone(r.whatsapp);
+    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td><td>${wa ? `<a href="${wa}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:6px 14px;font-size:13px;white-space:nowrap">Falar com Feirante</a>` : ""}</td>`;
     body.appendChild(tr);
   }
 }
@@ -194,7 +204,8 @@ function loadLocalLists() {
   document.getElementById("feirantes-table").hidden = feirantes.length === 0;
   for (const r of feirantes.slice().reverse()) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td>`;
+    const wa = waLinkFromPhone(r.whatsapp);
+    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td><td>${wa ? `<a href="${wa}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:6px 14px;font-size:13px;white-space:nowrap">Falar com Feirante</a>` : ""}</td>`;
     fBody.appendChild(tr);
   }
 }
