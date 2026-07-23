@@ -10,8 +10,8 @@
    site que usa Supabase); a proteção dos dados vem das políticas RLS
    criadas no SETUP.md, não do sigilo da chave.
 ===================================================== */
-const SUPABASE_URL = "";
-const SUPABASE_ANON_KEY = "";
+const SUPABASE_URL = "https://hepgprwnzngohiflzzrq.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhlcGdwcnduem5nb2hpZmx6enJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ4MDc5MzUsImV4cCI6MjEwMDM4MzkzNX0.9xWV4tKxePxem4ULShjR5yU9hciGXuErg5kJnRq3c6o";
 
 const sb = (SUPABASE_URL && SUPABASE_ANON_KEY && window.supabase)
   ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
