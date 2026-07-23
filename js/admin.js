@@ -86,6 +86,24 @@ document.getElementById("logout-btn").addEventListener("click", async () => {
 
 let agendaAtual = null;
 
+/* Monta o texto pronto pra avisar os inscritos da próxima edição,
+   sempre a partir dos dados que já estão salvos na agenda — editou a
+   agenda, editou a mensagem. */
+function composeNotificationMessage(a) {
+  if (!a) return "";
+  const lines = [
+    "📅 Feira Reuse Araruama — Próxima edição confirmada!",
+    "",
+    `🗓️ Data: ${a.dateText || "a definir"}`,
+    `🕒 Horário: ${a.schedule || "a definir"}`,
+    `📍 Local: ${a.address || "a definir"}`
+  ];
+  if (a.entradaGratuita) lines.push("🎟️ Entrada gratuita!");
+  if (a.mapUrl) { lines.push(""); lines.push(`🗺️ Mapa: ${a.mapUrl}`); }
+  lines.push("", "Te esperamos lá! 💚");
+  return lines.join("\n");
+}
+
 async function loadAgendaForm() {
   const { data } = await sb.from("agenda").select("*").eq("id", 1).maybeSingle();
   if (data) {
@@ -100,6 +118,8 @@ async function loadAgendaForm() {
     preview.innerHTML = a.imageUrl
       ? `<img src="${a.imageUrl}" alt="" style="width:100%;height:100%;object-fit:cover;display:block"/>`
       : "";
+    const notifTextarea = document.getElementById("notificacao-texto");
+    if (notifTextarea) notifTextarea.value = composeNotificationMessage(a);
   }
 }
 
@@ -152,9 +172,63 @@ function showFormMessage(el, text, ok) {
   el.style.color = ok ? "var(--verde-selo)" : "#b3261e";
 }
 
+/* ===== Notificar inscritos: copiar mensagem + exportar contatos =====
+   Sem API de WhatsApp/e-mail configurada, o envio em si continua manual
+   — isso só poupa o trabalho de montar a mensagem e separar os contatos. */
+let inscricoesAtuais = [];
+
+function csvEscape(v) {
+  const s = String(v == null ? "" : v);
+  if (s.includes(",") || s.includes('"') || s.includes("\n")) {
+    return '"' + s.replace(/"/g, '""') + '"';
+  }
+  return s;
+}
+
+function exportarContatosCsv(rows) {
+  const header = "email,whatsapp,data_inscricao";
+  const lines = rows.map((r) => [r.email, r.whatsapp, r.createdAt].map(csvEscape).join(","));
+  const csv = [header, ...lines].join("\r\n");
+  const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "inscritos-avise-me.csv";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
+document.getElementById("copiar-mensagem-btn").addEventListener("click", async () => {
+  const msg = document.getElementById("notificacao-msg");
+  const text = document.getElementById("notificacao-texto").value;
+  if (!text.trim()) {
+    showFormMessage(msg, "Configure a agenda primeiro para gerar a mensagem.", false);
+    return;
+  }
+  try {
+    await navigator.clipboard.writeText(text);
+    showFormMessage(msg, "Mensagem copiada! Agora é só colar no WhatsApp ou e-mail.", true);
+  } catch (err) {
+    showFormMessage(msg, "Não foi possível copiar automaticamente — selecione o texto e copie manualmente.", false);
+  }
+});
+
+document.getElementById("exportar-contatos-btn").addEventListener("click", () => {
+  const msg = document.getElementById("notificacao-msg");
+  if (!inscricoesAtuais.length) {
+    showFormMessage(msg, "Nenhum contato para exportar ainda.", false);
+    return;
+  }
+  exportarContatosCsv(inscricoesAtuais);
+  showFormMessage(msg, `${inscricoesAtuais.length} contato(s) exportado(s)!`, true);
+});
+
 async function loadInscricoes() {
   const { data, error } = await sb.from("inscricoes").select("*").order("created_at", { ascending: false });
   const rows = (error || !data) ? [] : data.map(rowToInscricao);
+  inscricoesAtuais = rows;
   document.getElementById("inscricoes-count").textContent = rows.length;
   const body = document.getElementById("inscricoes-body");
   body.innerHTML = "";
@@ -185,6 +259,7 @@ async function loadFeirantes() {
 
 function loadLocalLists() {
   const inscricoes = readLocalList("feiraReuseInscricoesLocal");
+  inscricoesAtuais = inscricoes;
   document.getElementById("inscricoes-count").textContent = inscricoes.length;
   const iBody = document.getElementById("inscricoes-body");
   iBody.innerHTML = "";
