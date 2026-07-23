@@ -24,6 +24,11 @@ const FEIRA_CONFIG = {
   // Domínio final do site, sem barra no fim (usado em canonical/OG/sitemap).
   siteUrl: "https://SEU-DOMINIO-AQUI.com.br",
 
+  // Cidades da Região dos Lagos que a feira também quer alcançar (SEO local
+  // — entra nos dados estruturados como "área atendida"). Ajuste a lista
+  // livremente; a cidade principal (Araruama) já é tratada à parte.
+  regiaoAtendida: ["Cabo Frio", "São Pedro da Aldeia", "Iguaba Grande", "Saquarema", "Arraial do Cabo", "Armação dos Búzios"],
+
   // Analytics e Ads — troque pelos IDs reais quando tiver as contas.
   ga4MeasurementId: "G-XXXXXXXXXX",
   metaPixelId: "0000000000000"

@@ -40,18 +40,40 @@ function renderStructuredData(agenda) {
   const social = Object.values((typeof FEIRA_CONFIG !== "undefined" && FEIRA_CONFIG.social) || {})
     .filter((url) => url && url !== "#");
   const siteUrl = (typeof FEIRA_CONFIG !== "undefined" && FEIRA_CONFIG.siteUrl) || "";
+  // Cidades da Região dos Lagos que a feira também quer alcançar no Google
+  // (schema.org "areaServed") — editável em js/config.js.
+  const regiao = (typeof FEIRA_CONFIG !== "undefined" && FEIRA_CONFIG.regiaoAtendida) || [];
+  const areaServed = ["Araruama", ...regiao].map((cidade) => ({
+    "@type": "City", name: cidade, containedInPlace: { "@type": "State", name: "Rio de Janeiro" }
+  }));
+
+  const enderecoLd = {
+    "@type": "PostalAddress",
+    streetAddress: agenda.address && agenda.address !== "a definir" ? agenda.address : "Araruama, RJ",
+    addressLocality: "Araruama",
+    addressRegion: "RJ",
+    addressCountry: "BR"
+  };
 
   const eventLd = {
     "@context": "https://schema.org",
     "@type": "Event",
     name: "Feira Reuse Araruama",
-    description: "Encontro mensal de economia circular com roupas sustentáveis, comida artesanal local e artesanato feito à mão.",
+    description: "Encontro mensal de economia circular com roupas sustentáveis, comida artesanal local e artesanato feito à mão, em Araruama e aberto a visitantes de toda a Região dos Lagos.",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
     location: {
       "@type": "Place",
       name: "Feira Reuse Araruama",
-      address: agenda.address || "Araruama, RJ"
+      address: enderecoLd
+    },
+    image: siteUrl ? siteUrl + "/img/illustration.jpg" : undefined,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "BRL",
+      availability: "https://schema.org/InStock",
+      url: siteUrl || undefined
     },
     organizer: { "@type": "Organization", name: "Feira Reuse Araruama", url: siteUrl }
   };
@@ -64,15 +86,11 @@ function renderStructuredData(agenda) {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Feira Reuse Araruama",
+    description: "Feira mensal de economia circular em Araruama (RJ) — moda circular, artesanato autoral e gastronomia local, atendendo visitantes de toda a Região dos Lagos.",
     image: siteUrl ? siteUrl + "/img/logo.jpg" : undefined,
     url: siteUrl || undefined,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: agenda.address || "a definir",
-      addressLocality: "Araruama",
-      addressRegion: "RJ",
-      addressCountry: "BR"
-    },
+    address: enderecoLd,
+    areaServed,
     sameAs: social.length ? social : undefined
   };
 
@@ -80,6 +98,31 @@ function renderStructuredData(agenda) {
   const orgEl = document.getElementById("ld-org");
   if (eventEl) eventEl.textContent = JSON.stringify(eventLd);
   if (orgEl) orgEl.textContent = JSON.stringify(orgLd);
+}
+
+/* FAQPage (schema.org) — gerado a partir do próprio conteúdo da seção FAQ,
+   pra nunca ficar dessincronizado do texto visível (edite o HTML, o
+   JSON-LD acompanha sozinho). Habilita o rich snippet de perguntas
+   frequentes direto no resultado de busca do Google. */
+function renderFaqStructuredData() {
+  const el = document.getElementById("ld-faq");
+  if (!el) return;
+  const items = [...document.querySelectorAll(".faq-item")].map((item) => {
+    const question = item.querySelector("summary")?.textContent.trim() || "";
+    const answer = item.querySelector("p")?.textContent.trim() || "";
+    return {
+      "@type": "Question",
+      name: question,
+      acceptedAnswer: { "@type": "Answer", text: answer }
+    };
+  }).filter((q) => q.name && q.acceptedAnswer.text);
+
+  if (!items.length) return;
+  el.textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items
+  });
 }
 
 /* Card da agenda: imagem do mês (ou placeholder), data/horário/local,
@@ -295,6 +338,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadAgenda();
   loadGaleria();
   loadRedesSociais();
+  renderFaqStructuredData();
   setupAviseMeForm();
   setupFeiranteForm();
   setupStaticCarousel("sobre-criterios-track", "sobre-criterios-dots", "sobre-criterios-prev", "sobre-criterios-next");
