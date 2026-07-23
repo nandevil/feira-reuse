@@ -89,8 +89,12 @@ create policy "todos podem ler agenda"
   on public.agenda for select to anon using (true);
 
 -- Apenas você (logado) pode ATUALIZAR a agenda
+-- (o botão "Salvar agenda" usa upsert, que no Postgres exige as
+-- políticas de INSERT e UPDATE juntas, mesmo a linha já existindo)
 create policy "dono pode atualizar agenda"
   on public.agenda for update to authenticated using (true) with check (true);
+create policy "dono pode inserir agenda"
+  on public.agenda for insert to authenticated with check (true);
 
 -- Visitantes (anônimos) podem CRIAR inscrições e candidaturas
 create policy "anon pode se inscrever"
