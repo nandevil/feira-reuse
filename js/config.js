@@ -8,18 +8,18 @@
 const FEIRA_CONFIG = {
   // Redes sociais — troque "#" pela URL real de cada perfil.
   social: {
-    instagram: "#", // ex: "https://instagram.com/feirareusearar"
+    instagram: "https://instagram.com/feira_reuse_araruama",
     facebook: "#",  // ex: "https://facebook.com/feirareusearar"
     tiktok: "#"     // ex: "https://tiktok.com/@feirareusearar"
   },
 
   // WhatsApp da organização, formato internacional sem espaços/símbolos.
   // Exemplo: "5522900000000" (55 = Brasil, 22 = DDD, resto o número).
-  whatsappNumber: "", // preencha para ativar os links/botão de WhatsApp
+  whatsappNumber: "5522999390065",
   whatsappMessage: "Olá! Vim pelo site da Feira Reuse Araruama.",
 
   // E-mail de contato exibido no rodapé.
-  email: "", // ex: "contato@feirareuseararuama.com.br"
+  email: "feirareuseararuama@hotmail.com",
 
   // Domínio final do site, sem barra no fim (usado em canonical/OG/sitemap).
   siteUrl: "https://SEU-DOMINIO-AQUI.com.br",
