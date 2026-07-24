@@ -31,7 +31,14 @@ const FEIRA_CONFIG = {
 
   // Analytics e Ads — troque pelos IDs reais quando tiver as contas.
   ga4MeasurementId: "G-XXXXXXXXXX",
-  metaPixelId: "0000000000000"
+  metaPixelId: "0000000000000",
+
+  // Domínio de e-mail novo (registrado em 2026): os primeiros e-mails de
+  // confirmação podem cair na caixa de spam/lixo eletrônico até a
+  // reputação de envio se firmar. Mostra um aviso disso na confirmação
+  // do "Avise-me". Quando a entrega estiver estável (depois de um tempo
+  // enviando sem reclamação), troque para false pra remover o aviso.
+  avisoSpamAtivo: true
 };
 
 /* Monta o link wa.me a partir do número acima; retorna "#" (inerte)

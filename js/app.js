@@ -292,7 +292,10 @@ function setupAviseMeForm() {
         list.push({ email, whatsapp, createdAt: new Date().toISOString() });
         writeLocalList(LOCAL_KEY_INSCRICOES, list);
       }
-      showFormMessage(msg, "Cadastro recebido! Vamos te avisar da próxima feira.", true);
+      const avisoSpam = (typeof FEIRA_CONFIG !== "undefined" && FEIRA_CONFIG.avisoSpamAtivo)
+        ? " Dica: confira também sua caixa de spam/lixo eletrônico, o e-mail pode cair lá nos primeiros envios."
+        : "";
+      showFormMessage(msg, "Cadastro recebido! Vamos te avisar da próxima feira." + avisoSpam, true);
       if (typeof trackLead === "function") trackLead("visitante");
       form.reset();
     } catch (err) {
