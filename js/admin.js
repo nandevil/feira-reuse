@@ -378,7 +378,7 @@ document.getElementById("galeria-list").addEventListener("click", async (e) => {
   if (idx < 0) return;
 
   if (e.target.classList.contains("galeria-delete")) {
-    if (!confirm("Excluir esta foto da galeria?")) return;
+    if (!confirm("Excluir este item da galeria?")) return;
     const item = galeriaItems[idx];
     await sb.storage.from("galeria").remove([item.storagePath]);
     await sb.from("galeria").delete().eq("id", id);
