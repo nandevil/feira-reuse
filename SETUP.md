@@ -119,6 +119,11 @@ create policy "dono pode apagar feirantes"
 create policy "todos podem ler galeria"
   on public.galeria for select to anon using (true);
 
+-- Você (logado) também precisa poder LER a galeria — não só o anon —
+-- senão a lista de fotos/vídeos do painel aparece sempre vazia.
+create policy "dono pode ler galeria"
+  on public.galeria for select to authenticated using (true);
+
 -- Apenas você (logado) pode ADICIONAR, EDITAR e APAGAR fotos da galeria
 create policy "dono pode inserir galeria"
   on public.galeria for insert to authenticated with check (true);
@@ -130,6 +135,11 @@ create policy "dono pode apagar galeria"
 -- Qualquer visitante pode LER os links/fotos das redes sociais
 create policy "todos podem ler redes sociais"
   on public.redes_sociais for select to anon using (true);
+
+-- Você (logado) também precisa poder LER as redes sociais — não só o
+-- anon — senão essa seção do painel aparece sempre vazia.
+create policy "dono pode ler redes sociais"
+  on public.redes_sociais for select to authenticated using (true);
 
 -- Apenas você (logado) pode ATUALIZAR os links/fotos das redes sociais
 create policy "dono pode atualizar redes sociais"
