@@ -304,7 +304,7 @@ function isVideoUrl(url) {
 
 function galeriaRowHtml(item, index, total) {
   const thumb = isVideoUrl(item.imageUrl)
-    ? `<video src="${item.imageUrl}" muted style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex:none"></video>`
+    ? `<video src="${item.imageUrl}" controls preload="metadata" onloadedmetadata="this.currentTime=0.1" style="width:120px;height:90px;object-fit:cover;border-radius:8px;flex:none;background:#000"></video>`
     : `<img src="${item.imageUrl}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex:none"/>`;
   return `<div class="galeria-row" data-id="${item.id}" style="display:flex;align-items:center;gap:12px;padding:10px;border:1px solid color-mix(in oklch, var(--verde-selo) 20%, transparent);border-radius:10px">
     ${thumb}
