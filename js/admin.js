@@ -304,14 +304,16 @@ function isVideoUrl(url) {
 
 function galeriaRowHtml(item, index, total) {
   const thumb = isVideoUrl(item.imageUrl)
-    ? `<video src="${item.imageUrl}" controls preload="metadata" onloadedmetadata="this.currentTime=0.1" style="width:120px;height:90px;object-fit:cover;border-radius:8px;flex:none;background:#000"></video>`
+    ? `<video src="${item.imageUrl}" controls preload="metadata" onloadedmetadata="this.currentTime=0.1" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex:none;background:#000"></video>`
     : `<img src="${item.imageUrl}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex:none"/>`;
-  return `<div class="galeria-row" data-id="${item.id}" style="display:flex;align-items:center;gap:12px;padding:10px;border:1px solid color-mix(in oklch, var(--verde-selo) 20%, transparent);border-radius:10px">
+  return `<div class="galeria-row" data-id="${item.id}" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:10px;border:1px solid color-mix(in oklch, var(--verde-selo) 20%, transparent);border-radius:10px">
     ${thumb}
-    <input type="text" class="galeria-caption-input" value="${escapeHtml(item.caption)}" placeholder="Legenda" style="flex:1;border:2px solid color-mix(in oklch, var(--verde-selo) 30%, transparent);border-radius:8px;padding:8px 10px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--verde-escuro)"/>
-    <button type="button" class="btn btn-secondary galeria-up" ${index === 0 ? "disabled" : ""} title="Mover para cima" style="padding:6px 10px">↑</button>
-    <button type="button" class="btn btn-secondary galeria-down" ${index === total - 1 ? "disabled" : ""} title="Mover para baixo" style="padding:6px 10px">↓</button>
-    <button type="button" class="btn btn-secondary galeria-delete" title="Excluir" style="padding:6px 10px;border-color:#b3261e;color:#b3261e">Excluir</button>
+    <input type="text" class="galeria-caption-input" value="${escapeHtml(item.caption)}" placeholder="Legenda" style="flex:1;min-width:140px;border:2px solid color-mix(in oklch, var(--verde-selo) 30%, transparent);border-radius:8px;padding:8px 10px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--verde-escuro)"/>
+    <div style="display:flex;gap:12px;flex:none;margin-left:auto">
+      <button type="button" class="btn btn-secondary galeria-up" ${index === 0 ? "disabled" : ""} title="Mover para cima" style="padding:6px 10px">↑</button>
+      <button type="button" class="btn btn-secondary galeria-down" ${index === total - 1 ? "disabled" : ""} title="Mover para baixo" style="padding:6px 10px">↓</button>
+      <button type="button" class="btn btn-secondary galeria-delete" title="Excluir" style="padding:6px 10px;border-color:#b3261e;color:#b3261e">Excluir</button>
+    </div>
   </div>`;
 }
 
