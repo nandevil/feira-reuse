@@ -9,7 +9,7 @@ const FEIRA_CONFIG = {
   // Redes sociais — troque "#" pela URL real de cada perfil.
   social: {
     instagram: "https://instagram.com/feira_reuse_araruama",
-    facebook: "#",  // ex: "https://facebook.com/feirareusearar"
+    facebook: "https://www.facebook.com/profile.php?id=100064792671133",
     tiktok: "#"     // ex: "https://tiktok.com/@feirareusearar"
   },
 
