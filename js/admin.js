@@ -221,7 +221,10 @@ document.getElementById("disparar-email-btn").addEventListener("click", async (e
     showFormMessage(msg, `E-mail enviado! ${data.sent} de ${data.total} inscritos receberam.`, true);
   } catch (err) {
     console.error(err);
-    showFormMessage(msg, "Não foi possível enviar os e-mails.", false);
+    const detail = err && err.context && typeof err.context.json === "function"
+      ? await err.context.json().then((j) => j.error).catch(() => null)
+      : null;
+    showFormMessage(msg, "Não foi possível enviar os e-mails." + (detail ? " (" + detail + ")" : ""), false);
   } finally {
     btn.disabled = false;
   }
