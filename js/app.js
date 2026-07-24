@@ -175,6 +175,12 @@ function escapeHtml(s) {
   return String(s || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 }
 
+/* Detecta se a URL de um item da galeria é de vídeo (pela extensão do
+   arquivo), para renderizar <video> em vez de <img>. */
+function isVideoUrl(url) {
+  return /\.(mp4|webm|mov|ogg)(\?|$)/i.test(url || "");
+}
+
 /* Carrossel da galeria — busca as fotos cadastradas no painel (tabela
    public.galeria) e monta os slides. Sem Supabase configurado (ou sem
    fotos ainda), mantém o placeholder que já está no HTML. */
@@ -202,7 +208,9 @@ async function loadGaleria() {
 
   track.innerHTML = items.map((it) => `
     <div class="carousel-slide">
-      <img src="${it.imageUrl}" alt="${escapeHtml(it.caption || "Foto da Feira Reuse")}" loading="lazy"/>
+      ${isVideoUrl(it.imageUrl) ?
+        `<video src="${it.imageUrl}" controls playsinline preload="metadata"></video>` :
+        `<img src="${it.imageUrl}" alt="${escapeHtml(it.caption || "Foto da Feira Reuse")}" loading="lazy"/>`}
       ${it.caption ? `<div class="carousel-caption">${escapeHtml(it.caption)}</div>` : ""}
     </div>`).join("");
   dotsWrap.innerHTML = items.map((_, i) =>

@@ -298,9 +298,16 @@ async function loadGaleria() {
   renderGaleriaList();
 }
 
+function isVideoUrl(url) {
+  return /\.(mp4|webm|mov|ogg)(\?|$)/i.test(url || "");
+}
+
 function galeriaRowHtml(item, index, total) {
+  const thumb = isVideoUrl(item.imageUrl)
+    ? `<video src="${item.imageUrl}" muted style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex:none"></video>`
+    : `<img src="${item.imageUrl}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex:none"/>`;
   return `<div class="galeria-row" data-id="${item.id}" style="display:flex;align-items:center;gap:12px;padding:10px;border:1px solid color-mix(in oklch, var(--verde-selo) 20%, transparent);border-radius:10px">
-    <img src="${item.imageUrl}" alt="" style="width:64px;height:64px;object-fit:cover;border-radius:8px;flex:none"/>
+    ${thumb}
     <input type="text" class="galeria-caption-input" value="${escapeHtml(item.caption)}" placeholder="Legenda" style="flex:1;border:2px solid color-mix(in oklch, var(--verde-selo) 30%, transparent);border-radius:8px;padding:8px 10px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--verde-escuro)"/>
     <button type="button" class="btn btn-secondary galeria-up" ${index === 0 ? "disabled" : ""} title="Mover para cima" style="padding:6px 10px">↑</button>
     <button type="button" class="btn btn-secondary galeria-down" ${index === total - 1 ? "disabled" : ""} title="Mover para baixo" style="padding:6px 10px">↓</button>
