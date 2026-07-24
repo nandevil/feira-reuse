@@ -227,6 +227,15 @@ function setupCarouselNav(track, dotsWrap, prevBtn, nextBtn) {
   const slides = [...track.children];
   const dots = [...dotsWrap.children];
 
+  /* Quando os slides cabem inteiros na largura visível (poucos itens,
+     ou tela grande), centraliza a fileira em vez de grudar à esquerda.
+     Quando não cabem, mantém alinhado à esquerda para rolar/arrastar. */
+  function updateFit() {
+    track.classList.toggle("carousel-track--fit", track.scrollWidth <= track.clientWidth + 1);
+  }
+  updateFit();
+  new ResizeObserver(updateFit).observe(track);
+
   function leftmostIndex() {
     const trackRect = track.getBoundingClientRect();
     let closest = 0, closestDist = Infinity;
