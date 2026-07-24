@@ -24,6 +24,10 @@ const FEIRA_CONFIG = {
   // Domínio final do site, sem barra no fim (usado em canonical/OG/sitemap).
   siteUrl: "https://feirareuseararuama.com.br",
 
+  // Link direto pra avaliação no Google Business Profile (aparece no
+  // botão "Avalie-nos no Google" do rodapé).
+  googleReviewUrl: "https://g.page/r/Cdiw_hLzsD6yEBM/review",
+
   // Cidades da Região dos Lagos que a feira também quer alcançar (SEO local
   // — entra nos dados estruturados como "área atendida"). Ajuste a lista
   // livremente; a cidade principal (Araruama) já é tratada à parte.
@@ -71,6 +75,10 @@ function applyFeiraConfigLinks() {
 
   document.querySelectorAll("[data-email-link]").forEach((el) => {
     if (FEIRA_CONFIG.email) el.href = "mailto:" + FEIRA_CONFIG.email;
+  });
+
+  document.querySelectorAll("[data-google-review-link]").forEach((el) => {
+    if (FEIRA_CONFIG.googleReviewUrl) el.href = FEIRA_CONFIG.googleReviewUrl;
   });
 }
 
