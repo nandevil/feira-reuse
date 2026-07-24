@@ -266,10 +266,18 @@ async function loadInscricoes() {
   document.getElementById("inscricoes-table").hidden = rows.length === 0;
   for (const r of rows) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.email)}</td><td>${escapeHtml(r.whatsapp)}</td>`;
+    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.email)}</td><td>${escapeHtml(r.whatsapp)}</td><td><button type="button" class="btn btn-secondary inscricao-delete" data-id="${r.id}" style="padding:6px 10px;font-size:13px;border-color:#b3261e;color:#b3261e">Excluir</button></td>`;
     body.appendChild(tr);
   }
 }
+
+document.getElementById("inscricoes-body").addEventListener("click", async (e) => {
+  if (!e.target.classList.contains("inscricao-delete")) return;
+  if (!confirm("Excluir esta inscrição?")) return;
+  const id = e.target.dataset.id;
+  await sb.from("inscricoes").delete().eq("id", id);
+  await loadInscricoes();
+});
 
 async function loadFeirantes() {
   const { data, error } = await sb.from("feirantes").select("*").order("created_at", { ascending: false });
@@ -282,10 +290,18 @@ async function loadFeirantes() {
   for (const r of rows) {
     const tr = document.createElement("tr");
     const wa = waLinkFromPhone(r.whatsapp);
-    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td><td>${wa ? `<a href="${wa}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:6px 14px;font-size:13px;white-space:nowrap">Falar com Feirante</a>` : ""}</td>`;
+    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td><td style="display:flex;gap:8px;flex-wrap:wrap">${wa ? `<a href="${wa}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:6px 14px;font-size:13px;white-space:nowrap">Falar com Feirante</a>` : ""}<button type="button" class="btn btn-secondary feirante-delete" data-id="${r.id}" style="padding:6px 10px;font-size:13px;border-color:#b3261e;color:#b3261e">Excluir</button></td>`;
     body.appendChild(tr);
   }
 }
+
+document.getElementById("feirantes-body").addEventListener("click", async (e) => {
+  if (!e.target.classList.contains("feirante-delete")) return;
+  if (!confirm("Excluir esta candidatura?")) return;
+  const id = e.target.dataset.id;
+  await sb.from("feirantes").delete().eq("id", id);
+  await loadFeirantes();
+});
 
 function loadLocalLists() {
   const inscricoes = readLocalList("feiraReuseInscricoesLocal");
