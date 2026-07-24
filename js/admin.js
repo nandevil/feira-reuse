@@ -200,6 +200,33 @@ function exportarContatosCsv(rows) {
   URL.revokeObjectURL(url);
 }
 
+document.getElementById("disparar-email-btn").addEventListener("click", async (e) => {
+  const msg = document.getElementById("notificacao-msg");
+  const subject = document.getElementById("notificacao-assunto").value.trim();
+  const message = document.getElementById("notificacao-texto").value;
+  if (!subject || !message.trim()) {
+    showFormMessage(msg, "Configure a agenda e o assunto primeiro.", false);
+    return;
+  }
+  if (!confirm("Enviar este e-mail para todos os inscritos agora?")) return;
+
+  const btn = e.target;
+  btn.disabled = true;
+  showFormMessage(msg, "Enviando...", true);
+  try {
+    const { data, error } = await sb.functions.invoke("send-agenda-email", {
+      body: { subject, message }
+    });
+    if (error) throw error;
+    showFormMessage(msg, `E-mail enviado! ${data.sent} de ${data.total} inscritos receberam.`, true);
+  } catch (err) {
+    console.error(err);
+    showFormMessage(msg, "Não foi possível enviar os e-mails.", false);
+  } finally {
+    btn.disabled = false;
+  }
+});
+
 document.getElementById("copiar-mensagem-btn").addEventListener("click", async () => {
   const msg = document.getElementById("notificacao-msg");
   const text = document.getElementById("notificacao-texto").value;

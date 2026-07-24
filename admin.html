@@ -138,12 +138,15 @@
       <div style="background:var(--creme-tint);border:1px solid color-mix(in oklch, var(--verde-selo) 25%, transparent);border-radius:10px;padding:16px;margin-bottom:20px">
         <label style="display:block;font-size:13px;font-weight:600;margin-bottom:8px">Mensagem pronta com os dados da próxima edição</label>
         <textarea id="notificacao-texto" rows="6" placeholder="Configure o Supabase e preencha a agenda para gerar a mensagem automaticamente." style="width:100%;border:2px solid color-mix(in oklch, var(--verde-selo) 30%, transparent);border-radius:8px;padding:10px 12px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--verde-escuro);background:#fff;box-sizing:border-box"></textarea>
+        <label style="display:block;font-size:13px;font-weight:600;margin:14px 0 8px">Assunto do e-mail</label>
+        <input type="text" id="notificacao-assunto" value="Feira Reuse Araruama — Próxima edição confirmada!" style="width:100%;border:2px solid color-mix(in oklch, var(--verde-selo) 30%, transparent);border-radius:8px;padding:10px 12px;font-family:'Poppins',sans-serif;font-size:14px;color:var(--verde-escuro);background:#fff;box-sizing:border-box"/>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <button type="button" id="disparar-email-btn" class="btn btn-primary" style="padding:8px 16px;font-size:13px">Enviar e-mail para todos os inscritos</button>
           <button type="button" id="copiar-mensagem-btn" class="btn btn-secondary" style="padding:8px 16px;font-size:13px">Copiar mensagem</button>
           <button type="button" id="exportar-contatos-btn" class="btn btn-secondary" style="padding:8px 16px;font-size:13px">Exportar contatos (CSV)</button>
         </div>
         <p id="notificacao-msg" class="form-msg" role="status"></p>
-        <p style="margin:10px 0 0;font-size:12px;color:color-mix(in oklch, var(--verde-escuro) 65%, transparent)">O envio em si (WhatsApp/e-mail) ainda é manual: copie a mensagem e cole numa lista de transmissão do WhatsApp, ou exporte os contatos e use no seu e-mail/serviço de disparo.</p>
+        <p style="margin:10px 0 0;font-size:12px;color:color-mix(in oklch, var(--verde-escuro) 65%, transparent)">O e-mail é enviado automaticamente para todos os inscritos ao clicar no botão. O envio por WhatsApp continua manual: copie a mensagem e cole numa lista de transmissão, ou exporte os contatos.</p>
       </div>
 
       <div id="inscricoes-empty" class="admin-empty" hidden>Ninguém se inscreveu ainda.</div>
