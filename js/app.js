@@ -209,7 +209,7 @@ async function loadGaleria() {
   track.innerHTML = items.map((it) => `
     <div class="carousel-slide">
       ${isVideoUrl(it.imageUrl) ?
-        `<video src="${it.imageUrl}" controls playsinline preload="metadata"></video>` :
+        `<video src="${it.imageUrl}" controls playsinline preload="metadata" onloadedmetadata="this.currentTime=0.1"></video>` :
         `<img src="${it.imageUrl}" alt="${escapeHtml(it.caption || "Foto da Feira Reuse")}" loading="lazy"/>`}
       ${it.caption ? `<div class="carousel-caption">${escapeHtml(it.caption)}</div>` : ""}
     </div>`).join("");
