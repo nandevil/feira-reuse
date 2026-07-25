@@ -28,6 +28,10 @@ const FEIRA_CONFIG = {
   // botão "Avalie-nos no Google" do rodapé).
   googleReviewUrl: "https://g.page/r/Cdiw_hLzsD6yEBM/review",
 
+  // Link de convite do grupo de avisos no WhatsApp (aparece no botão
+  // "Grupo de avisos WhatsApp" na home).
+  whatsappGroupUrl: "https://chat.whatsapp.com/DiHd1siwEAS7wcx2MrJDFu?s=cl&p=i&ilr=4",
+
   // Cidades da Região dos Lagos que a feira também quer alcançar (SEO local
   // — entra nos dados estruturados como "área atendida"). Ajuste a lista
   // livremente; a cidade principal (Araruama) já é tratada à parte.
@@ -79,6 +83,10 @@ function applyFeiraConfigLinks() {
 
   document.querySelectorAll("[data-google-review-link]").forEach((el) => {
     if (FEIRA_CONFIG.googleReviewUrl) el.href = FEIRA_CONFIG.googleReviewUrl;
+  });
+
+  document.querySelectorAll("[data-whatsapp-group-link]").forEach((el) => {
+    if (FEIRA_CONFIG.whatsappGroupUrl) el.href = FEIRA_CONFIG.whatsappGroupUrl;
   });
 }
 
