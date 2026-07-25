@@ -10,7 +10,7 @@ const FEIRA_CONFIG = {
   social: {
     instagram: "https://instagram.com/feira_reuse_araruama",
     facebook: "https://www.facebook.com/profile.php?id=100064792671133",
-    tiktok: "#"     // ex: "https://tiktok.com/@feirareusearar"
+    tiktok: "https://www.tiktok.com/@feira.reuse.araru"
   },
 
   // WhatsApp da organização, formato internacional sem espaços/símbolos.
