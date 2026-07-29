@@ -59,7 +59,7 @@ function renderStructuredData(agenda) {
     "@context": "https://schema.org",
     "@type": "Event",
     name: "Feira Reuse Araruama",
-    description: "Encontro mensal de economia circular com roupas sustentáveis, comida artesanal local e artesanato feito à mão, em Araruama e aberto a visitantes de toda a Região dos Lagos.",
+    description: "Encontro quinzenal (1º domingo e domingo do meio do mês) de economia circular com roupas sustentáveis, comida artesanal local e artesanato feito à mão, em Araruama e aberto a visitantes de toda a Região dos Lagos.",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     eventStatus: "https://schema.org/EventScheduled",
     location: {
@@ -86,7 +86,7 @@ function renderStructuredData(agenda) {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     name: "Feira Reuse Araruama",
-    description: "Feira mensal de economia circular em Araruama (RJ) — moda circular, artesanato autoral e gastronomia local, atendendo visitantes de toda a Região dos Lagos.",
+    description: "Feira quinzenal (1º domingo e domingo do meio do mês) de economia circular em Araruama (RJ) — moda circular, artesanato autoral e gastronomia local, atendendo visitantes de toda a Região dos Lagos.",
     image: siteUrl ? siteUrl + "/img/logo.jpg" : undefined,
     url: siteUrl || undefined,
     address: enderecoLd,
