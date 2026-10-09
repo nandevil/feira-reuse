@@ -1,0 +1,28 @@
+# Mantém o projeto Supabase (plano gratuito) ativo: ele é pausado após alguns
+# dias sem atividade. Faz uma consulta leve à tabela pública "agenda" todo dia.
+# Se o banco não responder (pausado/fora do ar), o workflow falha e o GitHub
+# avisa por e-mail. A chave "anon" é pública por design (já está em
+# js/supabase-client.js); a proteção dos dados vem das políticas RLS.
+name: Manter Supabase ativo
+
+on:
+  schedule:
+    - cron: "17 9 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Consultar a agenda no Supabase
+        run: |
+          status=$(curl -sS -m 30 -o /tmp/resposta.json -w "%{http_code}" \
+            "https://hepgprwnzngohiflzzrq.supabase.co/rest/v1/agenda?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_ANON_KEY}")
+          echo "HTTP ${status}"
+          cat /tmp/resposta.json
+          test "${status}" = "200"
+        env:
+          SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhlcGdwcnduem5nb2hpZmx6enJxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ4MDc5MzUsImV4cCI6MjEwMDM4MzkzNX0.9xWV4tKxePxem4ULShjR5yU9hciGXuErg5kJnRq3c6o
