@@ -186,8 +186,8 @@ function csvEscape(v) {
 }
 
 function exportarContatosCsv(rows) {
-  const header = "email,whatsapp,data_inscricao";
-  const lines = rows.map((r) => [r.email, r.whatsapp, r.createdAt].map(csvEscape).join(","));
+  const header = "email,whatsapp,data_inscricao,origem";
+  const lines = rows.map((r) => [r.email, r.whatsapp, r.createdAt, r.origem].map(csvEscape).join(","));
   const csv = [header, ...lines].join("\r\n");
   const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8;" });
   const url = URL.createObjectURL(blob);
@@ -266,7 +266,7 @@ async function loadInscricoes() {
   document.getElementById("inscricoes-table").hidden = rows.length === 0;
   for (const r of rows) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.email)}</td><td>${escapeHtml(r.whatsapp)}</td><td><button type="button" class="btn btn-secondary inscricao-delete" data-id="${r.id}" style="padding:6px 10px;font-size:13px;border-color:#b3261e;color:#b3261e">Excluir</button></td>`;
+    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.email)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.origem)}</td><td><button type="button" class="btn btn-secondary inscricao-delete" data-id="${r.id}" style="padding:6px 10px;font-size:13px;border-color:#b3261e;color:#b3261e">Excluir</button></td>`;
     body.appendChild(tr);
   }
 }
@@ -290,7 +290,7 @@ async function loadFeirantes() {
   for (const r of rows) {
     const tr = document.createElement("tr");
     const wa = waLinkFromPhone(r.whatsapp);
-    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td><td style="display:flex;gap:8px;flex-wrap:wrap">${wa ? `<a href="${wa}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:6px 14px;font-size:13px;white-space:nowrap">Falar com Feirante</a>` : ""}<button type="button" class="btn btn-secondary feirante-delete" data-id="${r.id}" style="padding:6px 10px;font-size:13px;border-color:#b3261e;color:#b3261e">Excluir</button></td>`;
+    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td><td>${escapeHtml(r.origem)}</td><td style="display:flex;gap:8px;flex-wrap:wrap">${wa ? `<a href="${wa}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:6px 14px;font-size:13px;white-space:nowrap">Falar com Feirante</a>` : ""}<button type="button" class="btn btn-secondary feirante-delete" data-id="${r.id}" style="padding:6px 10px;font-size:13px;border-color:#b3261e;color:#b3261e">Excluir</button></td>`;
     body.appendChild(tr);
   }
 }
@@ -313,7 +313,7 @@ function loadLocalLists() {
   document.getElementById("inscricoes-table").hidden = inscricoes.length === 0;
   for (const r of inscricoes.slice().reverse()) {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.email)}</td><td>${escapeHtml(r.whatsapp)}</td>`;
+    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.email)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.origem)}</td>`;
     iBody.appendChild(tr);
   }
 
@@ -326,7 +326,7 @@ function loadLocalLists() {
   for (const r of feirantes.slice().reverse()) {
     const tr = document.createElement("tr");
     const wa = waLinkFromPhone(r.whatsapp);
-    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td><td>${wa ? `<a href="${wa}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:6px 14px;font-size:13px;white-space:nowrap">Falar com Feirante</a>` : ""}</td>`;
+    tr.innerHTML = `<td>${fmtDate(r.createdAt)}</td><td>${escapeHtml(r.nome)}</td><td>${escapeHtml(r.whatsapp)}</td><td>${escapeHtml(r.produtos)}</td><td>${escapeHtml(r.origem)}</td><td>${wa ? `<a href="${wa}" target="_blank" rel="noopener" class="btn btn-secondary" style="padding:6px 14px;font-size:13px;white-space:nowrap">Falar com Feirante</a>` : ""}</td>`;
     fBody.appendChild(tr);
   }
 }

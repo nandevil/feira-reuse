@@ -14,6 +14,7 @@ O projeto resolve dois problemas da feira: dar visibilidade online ao evento (ag
 - **Formulário "Avise-me"**: visitantes se cadastram para receber um e-mail automático quando a próxima edição for confirmada.
 - **Formulário "Seja feirante"**: candidatos se inscrevem e a candidatura é sincronizada automaticamente para uma planilha do Google, além de ficar salva no banco de dados.
 - **Painel administrativo** (`admin.html`): gerenciamento da agenda, inscritos, candidaturas, galeria e redes sociais, sem precisar editar código.
+- **Origem do acesso** (painel): mostra de onde vêm as visitas e quais origens (Instagram, Facebook, WhatsApp, Google...) geram feirantes e público, com comparação entre períodos, resumo semanal, gerador de links com UTM e exportação em CSV. Só registra após o aceite do aviso de cookies e sem dados pessoais.
 - **Disparo de e-mail com um clique**: avisa todos os inscritos sobre a próxima edição, via integração com [Brevo](https://www.brevo.com/).
 - **SEO técnico**: dados estruturados (schema.org), sitemap, meta tags otimizadas e Google Search Console configurado.
 - **Google Business Profile** integrado, com botão de avaliação direto no site.

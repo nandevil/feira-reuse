@@ -282,14 +282,17 @@ function setupAviseMeForm() {
     const whatsapp = form.whatsapp.value.trim();
     if (!email || !whatsapp) return;
 
+    const origem = typeof origemParaCadastro === "function" ? origemParaCadastro() : null;
     btn.disabled = true;
     try {
       if (supabaseEnabled()) {
-        const { error } = await sb.from("inscricoes").insert({ email, whatsapp });
+        const linha = { email, whatsapp };
+        if (origem) linha.origem = origem;
+        const { error } = await sb.from("inscricoes").insert(linha);
         if (error) throw error;
       } else {
         const list = readLocalList(LOCAL_KEY_INSCRICOES);
-        list.push({ email, whatsapp, createdAt: new Date().toISOString() });
+        list.push({ email, whatsapp, origem: origem || "", createdAt: new Date().toISOString() });
         writeLocalList(LOCAL_KEY_INSCRICOES, list);
       }
       const avisoSpam = (typeof FEIRA_CONFIG !== "undefined" && FEIRA_CONFIG.avisoSpamAtivo)
@@ -297,6 +300,7 @@ function setupAviseMeForm() {
         : "";
       showFormMessage(msg, "Cadastro recebido! Vamos te avisar da próxima feira." + avisoSpam, true);
       if (typeof trackLead === "function") trackLead("visitante");
+      if (typeof trackEvento === "function") trackEvento("cadastro_avise_me");
       form.reset();
     } catch (err) {
       console.error(err);
@@ -320,18 +324,22 @@ function setupFeiranteForm() {
     const produtos = form.produtos.value.trim();
     if (!nome || !whatsapp || !produtos) return;
 
+    const origem = typeof origemParaCadastro === "function" ? origemParaCadastro() : null;
     btn.disabled = true;
     try {
       if (supabaseEnabled()) {
-        const { error } = await sb.from("feirantes").insert({ nome, whatsapp, produtos });
+        const linha = { nome, whatsapp, produtos };
+        if (origem) linha.origem = origem;
+        const { error } = await sb.from("feirantes").insert(linha);
         if (error) throw error;
       } else {
         const list = readLocalList(LOCAL_KEY_FEIRANTES);
-        list.push({ nome, whatsapp, produtos, status: "novo", createdAt: new Date().toISOString() });
+        list.push({ nome, whatsapp, produtos, origem: origem || "", status: "novo", createdAt: new Date().toISOString() });
         writeLocalList(LOCAL_KEY_FEIRANTES, list);
       }
       showFormMessage(msg, "Questionário enviado! A organização confirma sua vaga pelo WhatsApp.", true);
       if (typeof trackLead === "function") trackLead("feirante");
+      if (typeof trackEvento === "function") trackEvento("envio_feirante");
       form.reset();
     } catch (err) {
       console.error(err);

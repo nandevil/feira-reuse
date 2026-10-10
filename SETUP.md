@@ -262,3 +262,49 @@ const SUPABASE_ANON_KEY = "sua-anon-key-aqui";
 3. Salve, recarregue o site (`index.html`) e o painel (`admin.html`).
    O selo do painel deve mudar de "Modo local" para "Conectado à
    nuvem", e você poderá logar com o usuário criado no Passo 3.
+
+## Passo 8 — Origem do acesso (painel "Origem do acesso")
+
+Guarda de qual canal (Instagram, Google, WhatsApp...) cada visita,
+candidatura e cadastro veio. **Não guarda nenhum dado pessoal**: só o tipo
+do evento, a origem (`fonte / meio`) e a campanha. Só registra depois que
+o visitante aceita o aviso de cookies. No **SQL Editor**, cole e rode:
+
+```sql
+create table public.eventos (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  tipo text not null check (tipo in (
+    'visita','clique_grupo','clique_instagram','clique_mapa',
+    'clique_compartilhar','abriu_feirante','envio_feirante','cadastro_avise_me'
+  )),
+  origem text not null default 'direto / nenhum' check (char_length(origem) <= 120),
+  campanha text check (campanha is null or char_length(campanha) <= 60)
+);
+create index eventos_created_at_idx on public.eventos (created_at desc);
+
+alter table public.eventos enable row level security;
+alter table public.eventos force row level security;
+
+-- Visitantes (anônimos) só podem REGISTRAR eventos, nunca ler
+create policy "anon pode registrar evento"
+  on public.eventos for insert to anon with check (true);
+
+-- Só você (logado) lê e apaga (apagar serve pra limpar dados de teste)
+create policy "dono pode ler eventos"
+  on public.eventos for select to authenticated using (true);
+create policy "dono pode apagar eventos"
+  on public.eventos for delete to authenticated using (true);
+
+-- Coluna "Origem" nos cadastros (formato: fonte / meio)
+alter table public.inscricoes add column if not exists origem text
+  check (origem is null or char_length(origem) <= 120);
+alter table public.feirantes add column if not exists origem text
+  check (origem is null or char_length(origem) <= 120);
+```
+
+Depois, na planilha "Feirantes - Feira Reuse Araruama", escreva `Origem`
+na célula **F1** (cabeçalho) e atualize a Edge Function
+`sync-feirante-sheet` com o código do repositório
+(`docs/sync-feirante-sheet.ts`) — assim cada candidatura nova já cai na
+planilha com a origem.

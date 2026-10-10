@@ -42,7 +42,12 @@
     </div>
   </header>
 
-  <main class="admin-main">
+  <nav class="admin-tabs" role="tablist" aria-label="Seções do painel">
+    <button type="button" class="admin-tab" id="tab-gestao" role="tab" aria-selected="true" aria-controls="view-gestao">Gerenciar</button>
+    <button type="button" class="admin-tab" id="tab-origem" role="tab" aria-selected="false" aria-controls="view-origem">Origem do acesso</button>
+  </nav>
+
+  <main class="admin-main" id="view-gestao">
 
     <div class="admin-card">
       <h2>Próxima edição da feira</h2>
@@ -152,7 +157,7 @@
       <div id="inscricoes-empty" class="admin-empty" hidden>Ninguém se inscreveu ainda.</div>
       <div class="admin-table-wrap">
         <table class="admin-table" id="inscricoes-table" hidden>
-          <thead><tr><th>Data</th><th>E-mail</th><th>WhatsApp</th><th></th></tr></thead>
+          <thead><tr><th>Data</th><th>E-mail</th><th>WhatsApp</th><th>Origem</th><th></th></tr></thead>
           <tbody id="inscricoes-body"></tbody>
         </table>
       </div>
@@ -163,7 +168,7 @@
       <div id="feirantes-empty" class="admin-empty" hidden>Nenhuma candidatura recebida ainda.</div>
       <div class="admin-table-wrap">
         <table class="admin-table" id="feirantes-table" hidden>
-          <thead><tr><th>Data</th><th>Nome</th><th>WhatsApp</th><th>Produtos</th><th></th></tr></thead>
+          <thead><tr><th>Data</th><th>Nome</th><th>WhatsApp</th><th>Produtos</th><th>Origem</th><th></th></tr></thead>
           <tbody id="feirantes-body"></tbody>
         </table>
       </div>
@@ -191,10 +196,100 @@
     </div>
 
   </main>
+
+  <main class="admin-main wide" id="view-origem" hidden>
+    <div id="origem-local-msg" class="admin-empty" hidden>A página "Origem do acesso" só funciona com o Supabase conectado (veja SETUP.md, Passo 8).</div>
+    <div id="origem-conteudo">
+
+      <div class="admin-card">
+        <h2>Resumo da semana</h2>
+        <div id="origem-resumo" class="origem-resumo"><p>Carregando...</p></div>
+        <button type="button" id="origem-copiar-resumo" class="btn btn-secondary" style="margin-top:12px;padding:8px 16px;font-size:13px">Copiar resumo</button>
+        <p id="origem-resumo-msg" class="form-msg" role="status"></p>
+      </div>
+
+      <div class="admin-card">
+        <h2>De onde vêm os acessos</h2>
+        <div class="origem-filtros">
+          <div>
+            <label for="origem-periodo">Período</label>
+            <select id="origem-periodo">
+              <option value="7">Últimos 7 dias</option>
+              <option value="30" selected>Últimos 30 dias</option>
+              <option value="desde">Desde 12/10/2026</option>
+              <option value="custom">Personalizado</option>
+            </select>
+          </div>
+          <div id="origem-custom" hidden style="display:none;gap:12px;flex-wrap:wrap">
+            <div><label for="origem-de">De</label><input type="date" id="origem-de"/></div>
+            <div><label for="origem-ate">Até</label><input type="date" id="origem-ate"/></div>
+          </div>
+          <button type="button" id="origem-exportar" class="btn btn-secondary" style="padding:9px 16px;font-size:13px">Exportar CSV</button>
+        </div>
+        <p id="origem-periodo-texto" class="admin-empty" style="margin:10px 0 0"></p>
+        <div id="origem-aviso" class="origem-aviso" hidden>Poucos dados: use como tendência, não como conclusão.</div>
+        <div id="origem-vazio" class="admin-empty" hidden>Ainda sem acessos registrados neste período</div>
+
+        <div id="origem-dados" hidden style="margin-top:18px">
+          <div id="origem-cards" class="origem-cards"></div>
+          <p class="admin-empty" style="margin:0 0 18px">Resultados = entradas no grupo + candidaturas de feirante + cadastros no "Avise-me". Conversão = resultados ÷ visitas (a mesma pessoa pode gerar mais de um resultado). Comparação com o período anterior de mesmo tamanho.</p>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table origem-tabela" id="origem-tabela">
+              <thead><tr>
+                <th data-sort="origem">Origem</th>
+                <th class="num" data-sort="visitas">Visitas</th>
+                <th class="num" data-sort="grupo">Entrar no grupo</th>
+                <th class="num" data-sort="feirantes">Seja feirante</th>
+                <th class="num" data-sort="avise">Avise-me</th>
+                <th class="num" data-sort="mapa">Ver no mapa</th>
+                <th class="num" data-sort="conversao">Conversão</th>
+                <th class="num" data-sort="dVisitas">Visitas vs. anterior</th>
+                <th class="num" data-sort="dConversao">Conversão vs. anterior</th>
+              </tr></thead>
+              <tbody id="origem-corpo"></tbody>
+              <tfoot id="origem-rodape"></tfoot>
+            </table>
+          </div>
+
+          <div class="origem-rankings" style="margin-top:22px">
+            <div><h3>Origens que trazem feirantes</h3><div id="origem-rank-feirantes"></div></div>
+            <div><h3>Origens que trazem público</h3><div id="origem-rank-publico"></div></div>
+          </div>
+
+          <h3 style="font-family:'Poppins',sans-serif;text-transform:none;font-size:15px;margin:24px 0 8px">Visitas por dia, por origem</h3>
+          <div id="origem-grafico" class="origem-grafico"></div>
+          <div id="origem-legenda" class="origem-legenda"></div>
+        </div>
+      </div>
+
+      <div class="admin-card">
+        <h2>Gerador de links com UTM</h2>
+        <div class="utm-campos">
+          <div><label for="utm-destino">Endereço de destino</label><input type="url" id="utm-destino"/></div>
+          <div><label for="utm-campanha">Campanha</label><input type="text" id="utm-campanha" value="feira-31-10"/></div>
+        </div>
+
+        <div id="utm-atalhos"></div>
+
+        <h3 style="font-family:'Poppins',sans-serif;text-transform:none;font-size:15px;margin:22px 0 10px">Link personalizado</h3>
+        <div class="utm-campos">
+          <div><label for="utm-origem">Origem</label><input type="text" id="utm-origem" placeholder="ex: instagram"/></div>
+          <div><label for="utm-meio">Meio</label><input type="text" id="utm-meio" placeholder="ex: stories"/></div>
+        </div>
+        <code id="utm-resultado" style="display:block;font-size:13px;word-break:break-all;margin-bottom:10px"></code>
+        <button type="button" id="utm-copiar" class="btn btn-primary" style="padding:9px 18px;font-size:14px">Copiar link</button>
+        <p id="utm-msg" class="form-msg" role="status"></p>
+        <p class="admin-empty" style="margin:6px 0 0">Os links saem em minúsculas, sem acento nem espaço. Só valem para o registro de origem se o visitante aceitar o aviso de cookies.</p>
+      </div>
+
+    </div>
+  </main>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
 <script src="js/supabase-client.js"></script>
 <script src="js/admin.js"></script>
-</body>
+<script src="js/admin-origem.js"></script></body>
 </html>

@@ -55,7 +55,8 @@ function rowToInscricao(r) {
     id: r.id,
     createdAt: r.created_at,
     email: r.email,
-    whatsapp: r.whatsapp
+    whatsapp: r.whatsapp,
+    origem: r.origem || ""
   };
 }
 
@@ -67,6 +68,7 @@ function rowToFeirante(r) {
     nome: r.nome,
     whatsapp: r.whatsapp,
     produtos: r.produtos,
+    origem: r.origem || "",
     status: r.status || "novo"
   };
 }
